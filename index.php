@@ -4,10 +4,12 @@ include_once('php/components/material-switch/material-switch.php');
 include_once('php/components/table/table.php');
 include_once('php/models/skills-music/skills-music.php');
 include_once('php/models/rota/rota.php');
+include_once('php/models/rota/compile-rota-options.php');
 include_once('php/models/rota-member/rota-member.php');
 include_once('php/models/rota-member/rota-member-data.php');
 include_once('php/views/rota-member-availability.php');
 include_once('php/views/rota-member-skills.php');
+include_once('php/views/rota-allmembers.php');
 
 $CLS_rota_member = new RotaMember(1, '1', 'music');
 
@@ -70,7 +72,12 @@ $CLS_rota_member = new RotaMember(1, '1', 'music');
     <hr />
     <div class='container'>
 
-    <h1>Band setup</h1>
+    <?php
+      $cls = new RotaMembersAllView();
+      echo $cls->render();
+
+      $cls2 = new CompileRotaOptions();
+    ?>
 
     </div>
 
