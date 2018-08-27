@@ -3,21 +3,28 @@
 
 class RotaMember extends Rota
 {
-	private $username = 'jp';
-	private $userid = 1;
-	private $usernamefull = 'Jonathan Pearson';
-	private $availability = array(
-		"01/03/2018", "21/03/2018"
-	);
-	private $skills = array(
-		'music'=> array(1, 7)
-	);
-	private $rota_type = 'music';
 
-	function __construct()
+	function __construct($userid, $periodid, $rotatype)
 	{
-
+		parent::__construct();
+		
+		$this->userid = $userid;
+		$this->rota_type = $rotatype;
+		$this->periodid = $periodid;
+		$this->load_memberdata();
 	}
+
+	private function load_memberdata()
+	{
+		$mbd = new RotaMemberData($this->userid);
+		$this->memberdata = $mbd->read_from_json();
+		$this->username = $mbd->username();
+		$this->usernamefull = $mbd->usernamefull();
+		$this->skills = $mbd->skills();
+		$this->availability = $mbd->availability($this->rota_type, $this->periodid);
+	}
+
+
 
 	function num_days_available()
 	{

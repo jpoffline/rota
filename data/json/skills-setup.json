@@ -1,0 +1,41 @@
+{
+	"skills": [
+		{
+			"music": [
+				{
+					"title": "Sound",
+					"skillid": 1
+				},
+				{
+					"title": "Piano",
+					"skillid": 2
+				},
+				{
+					"title": "Voice",
+					"skillid": 3,
+					"icon": "volume-up"
+				},
+				{
+					"title": "Voice - lead",
+					"skillid": 4
+				},
+				{
+					"title": "Guitar",
+					"skillid": 5
+				},
+				{
+					"title": "Guitar - lead",
+					"skillid": 6
+				},
+				{
+					"title": "Bass guitar",
+					"skillid": 7
+				},
+				{
+					"title": "Drums",
+					"skillid": 8
+				}
+			]
+		}
+	]
+}
