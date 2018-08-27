@@ -3,25 +3,13 @@
 class RotaMembersAllView
 {
 
-	private $data = array(
-		array("01/02/18", "jp", "mb, ab", "mb", "ab"),
-		array("07/02/18", "jp", "mb", "mb", "ab"),
-		array("14/02/18", "jp", "mb, ab", "mb", "ab")
-	);
-	private $skills = array(
-		array('title'=>'Sound'), 
-		array('title'=>'Voice'), 
-		array('title'=>'Guitar'),
-		array('title'=>'Piano')
-	);
-
 	function __construct()
 	{
 		$groupname = 'Band';
-		
+		$period = "Spring 2018";
+
 		$this->groupname = $groupname;
 		$this->periodinfo = $period;
-		$this->gen_colnames($this->skills);
 	}
 
 	function gen_colnames($skills)
@@ -36,14 +24,18 @@ class RotaMembersAllView
 
 	function render()
 	{
-		
+		$dd = new CompileRotaOptions();
+
+		$data = $dd->get_compiled_rota();
+
 		$cls = new Table(
 			array(
-			  'colnames' => $this->colnames,
-			  'rows' => $this->data
+			  'colnames' => $dd->get_colnames(),
+			  'rows' => $data
 			)
 		);
-		return '<h1>'.$this->groupname.' setup</h1>'.$cls->render();
+		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1>'
+					.$cls->render();
 	}
 
 }
