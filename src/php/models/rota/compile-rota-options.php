@@ -56,6 +56,8 @@ class CompileRotaOptions
 		$empty = '-';
 		$delim = ' ';
 		$data = array();
+
+		$count_date = 0;
 		foreach($this->all_dates as $date)
 		{
 			$row = array();
@@ -66,17 +68,19 @@ class CompileRotaOptions
 			{
 				$row['skill'][$s['skillid']] = $empty;
 			}
-
+			$count_res = 0;
 			foreach($this->resources as $resource)
 			{
 				if(in_array($date, $resource['availability'][$type.'-periodid-'.$periodid]))
 				{
 					$row['people'][] = $resource['username'];
+					$count_skill=0;
 					foreach($this->skills as $a)
 					{
 						if(in_array($a['skillid'], $resource['skills'][$type]))
 						{
-							$resource_toprint = '<button id="cro">'.$resource['username'].'</button>';
+							$uid = $count_date . '-' . $count_res . '-' . $count_skill;
+							$resource_toprint = $this->render_resource($uid, $resource['username']);
 
 							if($row['skill'][$a['skillid']] !=$empty)
 							{
@@ -87,16 +91,25 @@ class CompileRotaOptions
 								$row['skill'][$a['skillid']]= $resource_toprint;
 							}
 						}
+						$count_skill++;
 					}
 				}
+				$count_res++;
 			}
 			$data[] = $row;
+			$count_date++;
 		}
 		
 		return $data;
 	}
 
-	
+	private function render_resource($id, $text)
+	{
+		$html_tag = 'button';
+		$css_init = 'btn btn-info btn-sm';
+		$js_onclick = 'onClickRotaResource(this.id);';
+		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'"onClick="'.$js_onclick.'">'.strToUpper($text).'</'.$html_tag.'>';	
+	}
 	
 	
 }
