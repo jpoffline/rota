@@ -14,6 +14,8 @@ onClickRotaResource = function(id)
 {
 	//alert(id);
 	element = document.getElementById(id);
+	if(element.parentElement.parentElement.classList.contains('editable-row'))
+	{
 	element.classList.toggle("active");
 	if(element.classList.contains("active"))
 	{
@@ -32,5 +34,13 @@ onClickRotaResource = function(id)
 	{
 		element.classList.replace("btn-sucess", "btn-info");
 	}
+}
 
+}
+
+onClickActiveRow = function(id)
+{
+	element = document.getElementById(id);
+	element.parentElement.parentElement.classList.toggle('table-warning');
+	element.parentElement.parentElement.classList.toggle('editable-row');
 }

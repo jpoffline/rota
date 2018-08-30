@@ -61,7 +61,7 @@ class CompileRotaOptions
 		foreach($this->all_dates as $date)
 		{
 			$row = array();
-			$row['date'] = $date;
+			$row['date'] = '<div onClick="onClickActiveRow(this.id);" id = "rota-row-'.$count_date.'">'.$date.'</div>';
 			$row['people'] = array();
 			$row['skill'] = array();
 			foreach($this->skills as $s)

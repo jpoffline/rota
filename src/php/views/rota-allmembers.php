@@ -6,7 +6,7 @@ class RotaMembersAllView
 	function __construct()
 	{
 		$groupname = 'Band';
-		$period = "Spring 2018";
+		$period = "Winter 2018";
 
 		$this->groupname = $groupname;
 		$this->periodinfo = $period;
