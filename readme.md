@@ -5,3 +5,4 @@
 ## Functionality
 * allow rota members to provide skills and availability
 * allow rota admins to build teams from available members
+* on the admin page, click on a date to make the row editable
