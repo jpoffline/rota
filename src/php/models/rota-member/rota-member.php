@@ -17,7 +17,6 @@ class RotaMember extends Rota
 	private function load_memberdata()
 	{
 		$mbd = new RotaMemberData($this->userid);
-		$this->memberdata = $mbd->read_from_json();
 		$this->username = $mbd->username();
 		$this->usernamefull = $mbd->usernamefull();
 		$this->skills = $mbd->skills();

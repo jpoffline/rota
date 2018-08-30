@@ -31,7 +31,7 @@ function Comp_MaterialSwitch_guts($props)
 function Comp_MaterialSwitch_switch($props)
 {
 	return '
-	<div class="material-switch">
+	<div >
 		'.Comp_MaterialSwitch_guts($props).'
 	</div>';
 }
@@ -47,7 +47,7 @@ function Comp_MaterialSwitch($props)
 	return '
 		<li class="list-group-item">'.$icon.'
 			'.$title.'
-			<div class="material-switch pull-right">
+			<div >
 			'.Comp_MaterialSwitch_guts($props).'
 			</div>
 		</li>';
@@ -62,7 +62,7 @@ class MaterialSwitches
 	
 	function render()
 	{
-		$html = '<ul class="list-group">';
+		/*$html = '<ul class="list-group">';
 		$count = 0;
 		$id_base = $this->data['groupid'];
 		foreach($this->data['data'] as $item)
@@ -73,7 +73,27 @@ class MaterialSwitches
 			);
 			$count ++;
 		}
-		return $html.'</ul>';
+		return $html.'</ul>';*/
+
+		$colnames = array('Skill', 'Have it?');
+		$rows = array();
+		$id_base = $this->data['groupid'];
+		foreach($this->data['data'] as $item)
+		{
+			$item['id'] = $id_base.$count;
+			$v = Comp_MaterialSwitch_switch($item);
+			$k = $item['title'];
+			$row = array($k, $v);
+			$rows[] = $row;
+			$count ++;
+		}
+		$cls = new Table(
+			array(
+				'colnames'=>$colnames,
+				'rows' =>$rows
+			)
+		);
+		return $cls->render();
 	}
 
 }

@@ -1,26 +1,18 @@
 <?php
 
-class RotaMemberData
+class RotaMemberData extends RotaMembers
 {
 	private $userid;
 	function __construct($userid)
 	{
+		parent::__construct();
 		$this->userid = $userid;
+		$this->read_from_json();
 	}
 
 	function read_from_json()
 	{
-		$fn = 'data/json/rota-members.json';
-		$membersdata = read_json_file($fn)['rotamembers'];
-		foreach($membersdata as $m)
-		{
-			if($m['userid'] == $this->userid)
-			{
-				$this->memberdata = $m;
-				break;
-			}
-		}
-		return $this->memberdata;
+		$this->memberdata = $this->get_data_for_member($this->userid);
 	}
 
 	function username()

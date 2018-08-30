@@ -1,0 +1,13 @@
+.show_username{
+	background: blue; 
+	border-radius: 20px;  
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: inline-block;
+}
+
+
+.active {
+    background: #FF0;
+}

@@ -71,13 +71,15 @@ class CompileRotaOptions
 					{
 						if(in_array($a['skillid'], $resource['skills'][$type]))
 						{
+							$resource_toprint = '<button id="cro">'.$resource['username'].'</button>';
+
 							if($row['skill'][$a['skillid']] !=$empty)
 							{
-								$row['skill'][$a['skillid']].= $delim.$this->style_username($resource['username']);
+								$row['skill'][$a['skillid']].= $delim.$resource_toprint;
 							}
 							else
 							{
-								$row['skill'][$a['skillid']]= $this->style_username($resource['username']);
+								$row['skill'][$a['skillid']]= $resource_toprint;
 							}
 						}
 					}
@@ -89,20 +91,6 @@ class CompileRotaOptions
 		return $data;
 	}
 
-	private function str_hash($str, $range=255){
-		$number = crc32($str);
-		return $number % $range;
-	}
-
-	private function style_username($un)
-	{
-		$un_hash = $this->str_hash($un);
-		$r = $un_hash;
-		$g = $un_hash;
-		$b = $un_hash;
-		$rgb='rgb('.$r. ','.$g. ','.$b.')';
-		return '<span class="jp-badge" style="background-color:'.$rgb.'">'.$un.'</span>';
-	}
 	
 	
 	

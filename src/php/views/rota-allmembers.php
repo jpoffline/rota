@@ -34,7 +34,7 @@ class RotaMembersAllView
 			  'rows' => $data
 			)
 		);
-		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1>'
+		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1><h2>View: availability of skill sets</h2>'
 					.$cls->render();
 	}
 
