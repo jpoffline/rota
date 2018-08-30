@@ -2,28 +2,26 @@
 
 class Rota
 {
-	private $all_dates;
-	private $all_skills;
-
+	
 	function __construct()
 	{
-		$this->all_dates = read_json_file('data/json/rota-setup.json');
-		$this->json_a = read_json_file('data/json/skills-setup.json');
+		$this->rotadates  = new RotaDataSetup();
+		$this->skillsdata = new SkillsDataSetup();
 	}
 
 	function get_period_name($type)
 	{
-		return $this->all_dates[$type]['periods'][0]['periodname'];
+		return $this->rotadates->get_period_for_type($type, 0)['periodname'];
 	}
 
 	function get_all_dates($type)
 	{
-		return $this->all_dates[$type]['periods'][0]['dates'];
+		return $this->rotadates->get_dates_for_type_and_periodid($type, 0);
 	}
 
 	function get_all_skills($type)
 	{
-		return $this->json_a['skills'][0][$type];
+		return $this->skillsdata->get_skills_for_type($type);
 	}
 
 	

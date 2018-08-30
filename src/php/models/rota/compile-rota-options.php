@@ -11,9 +11,14 @@ class CompileRotaOptions
 	function __construct()
 	{
 		$this->type = 'music';
-		$this->skills    = read_json_file('data/json/skills-setup.json')['skills'][0][$this->type];
-		$this->resources = read_json_file('data/json/rota-members.json')['rotamembers'];
-		$this->all_dates = read_json_file('data/json/rota-setup.json')[$this->type]['periods'][0]['dates'];
+		$skillsdata = new SkillsDataSetup();
+		$rotamembers = new RotaMembers();
+		$rotadates = new RotaDataSetup();
+		
+		$this->skills    = $skillsdata->get_skills_for_type($this->type);
+		$this->resources = $rotamembers->get_all();
+		
+		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->type, 0);
 	}
 
 	function get_colnames()

@@ -18,5 +18,10 @@ class RotaMembers
 			}
 		}
 	}
+
+	function get_all()
+	{
+		return $this->membersdata;
+	}
 }
 ?>
