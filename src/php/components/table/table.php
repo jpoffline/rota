@@ -79,4 +79,34 @@ class Table
 
 }
 
+function sqltbl_to_html($data){
+	$tb = '';
+	$tb.= '<table class="table">';
+
+	$first = true;
+	foreach($data as $rr){
+
+		if($first)
+		{
+			$keys = array_keys($rr);
+			$head = '<thead><tr>';
+			foreach($keys as $key){
+				$head.='<th>'.$key.'</th>';
+			}
+			$first = false;
+			$tb.=$head.'</tr></thead><tbody>';
+		}
+		
+		$tb.= '<tr>';
+		$row = '';
+		foreach($rr as $rrr){
+			$row .= '<td>'.$rrr.'</td>';
+		}
+		$tb.= $row.'</tr>';
+	}
+	$tb.= '</tbody>';
+	$tb.= '</table>';
+	return $tb;
+}
+
 ?>

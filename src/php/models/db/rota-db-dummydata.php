@@ -7,10 +7,10 @@ function RotaSQL_setDummyInfo()
 	
 	
 	// 	Some members
-	$conn->query("INSERT INTO members (userid, username, firstname, lastname) VALUES (1,'jp', 'Jonathan', 'Pearson')");
-	$conn->query("INSERT INTO members (userid, username, firstname, lastname) VALUES (2,'mb', 'Matt', 'Burgin')");
-	$conn->query("INSERT INTO members (userid, username, firstname, lastname) VALUES (3,'ab', 'Anna', 'Burgin')");
-	$conn->query("INSERT INTO members (userid, username, firstname, lastname) VALUES (4,'ip', 'Iona', 'Pearson')");
+	$conn->query("INSERT INTO members (username, firstname, lastname) VALUES ('jp', 'Jonathan', 'Pearson')");
+	$conn->query("INSERT INTO members (username, firstname, lastname) VALUES ('mb', 'Matt', 'Burgin')");
+	$conn->query("INSERT INTO members (username, firstname, lastname) VALUES ('ab', 'Anna', 'Burgin')");
+	$conn->query("INSERT INTO members (username, firstname, lastname) VALUES ('ip', 'Iona', 'Pearson')");
 	
 	// 	Some rotas
 	$conn->query("INSERT INTO rotas (rotaname, groupname) VALUES ('music', 'Band')");
@@ -73,23 +73,26 @@ function RotaSQL_setDummyInfo()
 	$conn->query("INSERT INTO memberskills (userid, skillid) VALUES (1,11)");
 	
 	// 	Declare availability for users on rotas.
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,1,1,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,1,2,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,1,3,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,1,8,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,1,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,2,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,3,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,8,1,1)");
 	
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,2,1,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,2,3,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,2,4,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,2,1,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,2,3,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,2,4,1,1)");
 	
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,3,1,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,3,3,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (1,3,5,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,3,1,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,3,3,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,3,5,1,1)");
 
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (2,1,5,3)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (2,1,6,3)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid) VALUES (2,1,7,3)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,5,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,6,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,7,3,1)");
 	
+	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('tentative');");
+	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('confirmed');");
+
 }
 
 ?>

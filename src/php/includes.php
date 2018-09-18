@@ -23,6 +23,8 @@ include_once('src/php/models/db/rota-db-dummydata.php');
 include_once('src/php/models/db/rota-db-interface.php');
 include_once('src/php/models/db/rota-rotas.php');
 include_once('src/php/models/db/rota-periods.php');
+include_once('src/php/models/db/rota-members.php');
+include_once('src/php/models/db/rota-availiabilitytypes.php');
 RotaSQL_setupdb();
 
 $RESET = false;

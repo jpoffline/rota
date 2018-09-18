@@ -13,14 +13,32 @@ class RotaDBInterface
 
 	private $RotaDB_rotastbl;
 	private $RotaDB_periodstbl;
+	private $RotaDB_availabilitytypestbl;
+	private $RotaDB_memberstbl;
 	
 	function __construct($org = 'shbc'){
-		
+
 		$this->_create_db();
 		$this->_connect_to_rota_sql();
 
 		$this->RotaDB_rotastbl = new RotaDB_rotastbl($this->sqlconn);
 		$this->RotaDB_periodstbl = new RotaDB_periodstbl($this->sqlconn);
+		$this->RotaDB_availabilitytypestbl = new RotaDB_availabilitytypestbl($this->sqlconn);
+		$this->RotaDB_memberstbl = new RotaDB_memberstbl($this->sqlconn);
+	}
+
+	function add_member(
+		$new_username, 
+		$new_firstname, 
+		$new_lastname, 
+		$new_rotamembership
+	){
+		$this->RotaDB_memberstbl->add_member(
+			$new_username,
+			$new_firstname,
+			$new_lastname,
+			$new_rotamembership
+		);
 	}
 
 	function add_rota($rotaname){
@@ -31,8 +49,20 @@ class RotaDBInterface
 		return $this->RotaDB_rotastbl->get_all();
 	}
 
+	function get_all_members(){
+		return $this->RotaDB_memberstbl->get_all();
+	}
+
 	function get_periods_for_rota($rotaname){
 		return $this->RotaDB_periodstbl->get_all_for_rota($rotaname);
+	}
+
+	function get_periods(){
+		return $this->RotaDB_periodstbl->get_all();
+	}
+
+	function get_all_availabilitytypes(){
+		return $this->RotaDB_availabilitytypestbl->get_all();
 	}
 	
 	private function _connect_to_rota_sql(){

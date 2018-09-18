@@ -70,9 +70,11 @@ function RotaSQL_setuptbls()
 	SQL_deltbl($conn, "skillstypes");
 	SQL_deltbl($conn, "rotaavailability");
 	
+	SQL_deltbl($conn, "availabilitytypes");
+	
 	
 	$sql = "CREATE TABLE IF NOT EXISTS members (
-	userid INT UNSIGNED,
+	userid INT unsigned AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(30) NOT NULL,
 	firstname VARCHAR(30) NOT NULL,
 	lastname VARCHAR(30) NOT NULL
@@ -163,10 +165,22 @@ function RotaSQL_setuptbls()
 		rotaid INT UNSIGNED NOT NULL,
 		userid INT UNSIGNED NOT NULL,
 		dateid INT UNSIGNED NOT NULL,
-		periodid INT UNSIGNED NOT NULL
+		periodid INT UNSIGNED NOT NULL,
+		availtypeid INT UNSIGNED NOT NULL
 	)";
 	if ($conn->query($sql) === TRUE) {
 		//e		cho "Table rotaavailability created successfully";
+	}
+	else {
+		//e		cho "Error creating table: " . $conn->error;
+	}
+
+	$sql = "CREATE TABLE IF NOT EXISTS availabilitytypes (
+		availtypeid INT unsigned AUTO_INCREMENT PRIMARY KEY,
+		availtype VARCHAR(30) NOT NULL
+	)";
+	if ($conn->query($sql) === TRUE) {
+		//e		cho "Table rotamembership created memberskills";
 	}
 	else {
 		//e		cho "Error creating table: " . $conn->error;
