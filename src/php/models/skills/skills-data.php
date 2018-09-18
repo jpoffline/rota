@@ -6,7 +6,7 @@ class SkillsDataSetup
 
 	function __construct()
 	{
-		$this->data = read_json_file('data/json/skills-setup.json');
+		//$this->data = read_json_file('data/json/skills-setup.json');
 	}
 
 	function get_skills_for_type($type)

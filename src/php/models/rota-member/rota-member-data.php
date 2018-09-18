@@ -9,7 +9,7 @@ class RotaMemberData extends RotaMembers
 	{
 		parent::__construct();
 		$this->userid = $userid;
-		$this->read_from_json();
+		//$this->read_from_json();
 		$this->username = get_username_for_userid($this->userid);
 		$this->usernamefull = get_usernamefull_for_userid($this->userid);
 	}

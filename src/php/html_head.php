@@ -22,7 +22,8 @@ echo '
   </head>
   <body>
   SHBC // rota // music // <a href="index.php">home</a> //
-  <a href="rota-admin.php">admin</a>
+  <a href="rota-admin.php">admin</a> //
+  <a href="rota-setup.php">setup</a>
   
 ';
 

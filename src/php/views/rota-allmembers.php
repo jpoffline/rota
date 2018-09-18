@@ -2,14 +2,22 @@
 
 class RotaMembersAllView
 {
-
-	function __construct()
+	private $rotaname;
+	private $periodid;
+	private $groupname;
+	private $periodinfo;
+	function __construct(
+		$rotaname,
+		$periodid
+	)
 	{
-		$groupname = 'Band';
-		$period = "Winter 2018";
-
-		$this->groupname = $groupname;
-		$this->periodinfo = $period;
+		$this->rotaname = $rotaname;
+		$this->periodid = $periodid;
+		$this->periodinfo = get_periodname_for_type(
+			$this->rotaname,
+			$this->periodid
+		);
+		$this->groupname = get_groupname_for_rota($this->rotaname);
 	}
 
 	function gen_colnames($skills)
@@ -24,9 +32,9 @@ class RotaMembersAllView
 
 	function render()
 	{
-		$dd = new CompileRotaOptions();
-		$periodid = '1';
-		$data = $dd->get_compiled_rota($periodid);
+		$dd = new CompileRotaOptions($this->rotaname);
+		
+		$data = $dd->get_compiled_rota($this->periodid);
 
 		$cls = new Table(
 			array(

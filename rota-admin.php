@@ -1,10 +1,7 @@
 <?php
 
 include_once('src/php/includes.php');
-include_once('src/php/models/db/rota-db-general.php');
-RotaSQL_setupbd();
-RotaSQL_setuptbls();
-RotaSQL_setDummyInfo();
+
 ?>
 
 <?php
@@ -12,8 +9,9 @@ include_once('src/php/html_head.php');
 ?>
     <div class='container'>
 
+
     <?php
-      $cls = new RotaMembersAllView();
+      $cls = new RotaMembersAllView('music', 1);
       echo $cls->render();
     ?>
 
@@ -21,5 +19,5 @@ include_once('src/php/html_head.php');
 
 
 <?php
-include_once('src/php/html_foot.php');
+  include_once('src/php/html_foot.php');
 ?>

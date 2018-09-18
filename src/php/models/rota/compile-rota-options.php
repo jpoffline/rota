@@ -8,17 +8,17 @@ class CompileRotaOptions
 	private $skills;
 	
 
-	function __construct()
+	function __construct($rotaname)
 	{
-		$this->type = 'music';
-		$skillsdata = new SkillsDataSetup();
+		$this->type = $rotaname;
+		$skillsdata  = new SkillsDataSetup();
 		$rotamembers = new RotaMembers();
-		$rotadates = new RotaDataSetup();
+		$rotadates   = new RotaDataSetup();
 		
 		$this->skills    = $skillsdata->get_skills_for_type($this->type);
 		$this->resources = $rotamembers->get_all();
 		
-		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->type, 0);
+		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->type, 1);
 	}
 
 	function get_colnames()
@@ -58,6 +58,7 @@ class CompileRotaOptions
 		$data = array();
 
 		$count_date = 0;
+		$userids_in_period_for_rota = get_userids_for_period_in_rota($periodid, $type);
 		foreach($this->all_dates as $date)
 		{
 			$row = array();
@@ -69,26 +70,36 @@ class CompileRotaOptions
 				$row['skill'][$s['skillid']] = $empty;
 			}
 			$count_res = 0;
-			foreach($this->resources as $resource)
+			foreach($userids_in_period_for_rota as $resource)
 			{
-				if(in_array($date, $resource['availability'][$type.'-periodid-'.$periodid]))
+				$resource_userid = $resource;
+				$resource_username = get_username_for_userid($resource_userid);
+				
+				$resource_availability = list_availability_for_user_rota_period(
+					$resource_username,
+					$type,
+					$periodid
+				);
+				$resource_skillids = get_skillids_for_username_in_rota($resource_userid, $type);
+				if(in_array($date, $resource_availability))
 				{
-					$row['people'][] = $resource['username'];
+					$row['people'][] = $resource_username;
 					$count_skill=0;
 					foreach($this->skills as $a)
 					{
-						if(in_array($a['skillid'], $resource['skills'][$type]))
+						$skillid = $a['skillid'];
+						if(in_array($skillid, $resource_skillids))
 						{
 							$uid = $count_date . '-' . $count_res . '-' . $count_skill;
-							$resource_toprint = $this->render_resource($uid, $resource['username']);
+							$resource_toprint = $this->render_resource($uid, $resource_username);
 
-							if($row['skill'][$a['skillid']] !=$empty)
+							if($row['skill'][$skillid] !=$empty)
 							{
-								$row['skill'][$a['skillid']].= $delim.$resource_toprint;
+								$row['skill'][$skillid].= $delim.$resource_toprint;
 							}
 							else
 							{
-								$row['skill'][$a['skillid']]= $resource_toprint;
+								$row['skill'][$skillid]= $resource_toprint;
 							}
 						}
 						$count_skill++;
