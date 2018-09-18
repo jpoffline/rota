@@ -2,6 +2,7 @@
 include_once('src/php/lib/json.php');
 include_once('src/php/components/material-switch/material-switch.php');
 include_once('src/php/components/table/table.php');
+include_once('src/php/components/icons/icon.php');
 include_once('src/php/models/skills-music/skills-music.php');
 include_once('src/php/models/rota/rota.php');
 include_once('src/php/models/rota/data-rota-setup.php');

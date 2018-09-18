@@ -12,18 +12,18 @@ onChangeListen = function(WhichModel, WhichId)
 
 onClickRotaResource = function(id)
 {
-	//alert(id);
 	element = document.getElementById(id);
 	if(element.parentElement.parentElement.classList.contains('editable-row'))
 	{
 	element.classList.toggle("active");
+	icon = to_icon('check');
 	if(element.classList.contains("active"))
 	{
-		element.innerHTML = '<i class="fa fa-check"></i> ' + element.innerHTML;
+		element.innerHTML = icon + ' ' + element.innerHTML;
 	}
 	else
 	{
-		element.innerHTML = element.innerHTML.replace('<i class="fa fa-check"></i> ','');
+		element.innerHTML = element.innerHTML.replace(icon + ' ','');
 	}
 
 	if(element.classList.contains("btn-info"))

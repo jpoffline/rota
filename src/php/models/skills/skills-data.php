@@ -11,7 +11,7 @@ class SkillsDataSetup
 
 	function get_skills_for_type($type)
 	{
-		return $this->data['skills'][0][$type];
+		return list_skills_for_rota($type);//$this->data['skills'][0][$type];
 	}
 
 	

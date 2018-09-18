@@ -11,12 +11,12 @@ class Rota
 
 	function get_period_name($type)
 	{
-		return $this->rotadates->get_period_for_type($type, 0)['periodname'];
+		return $this->rotadates->get_periodname_for_type($type);
 	}
 
 	function get_all_dates($type)
 	{
-		return $this->rotadates->get_dates_for_type_and_periodid($type, 0);
+		return $this->rotadates->get_dates_for_type_and_periodid($type);
 	}
 
 	function get_all_skills($type)

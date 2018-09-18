@@ -1,5 +1,10 @@
 <?php
 include_once('src/php/includes.php');
+
+include_once('src/php/models/db/rota-db-general.php');
+RotaSQL_setupbd();
+RotaSQL_setuptbls();
+RotaSQL_setDummyInfo();
 ?>
 
 

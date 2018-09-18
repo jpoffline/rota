@@ -32,9 +32,9 @@ class CompileRotaOptions
 		return $colnames;
 	}
 
-	function get_compiled_rota()
+	function get_compiled_rota($periodid)
 	{
-		$who = $this->who_available_when();
+		$who = $this->who_available_when($periodid);
 		$data = array();
 		foreach($who as $dd)
 		{
@@ -49,10 +49,10 @@ class CompileRotaOptions
 		return $data;
 	}
 
-	private function who_available_when()
+	private function who_available_when($periodid)
 	{
 		$type = $this->type;
-		$periodid = '1';
+		 
 		$empty = '-';
 		$delim = ' ';
 		$data = array();

@@ -25,8 +25,8 @@ class RotaMembersAllView
 	function render()
 	{
 		$dd = new CompileRotaOptions();
-
-		$data = $dd->get_compiled_rota();
+		$periodid = '1';
+		$data = $dd->get_compiled_rota($periodid);
 
 		$cls = new Table(
 			array(
