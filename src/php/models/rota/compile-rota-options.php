@@ -11,6 +11,7 @@ class CompileRotaOptions
 	function __construct($rotaname)
 	{
 		$this->type = $rotaname;
+		$this->rotaid = 1;
 		$skillsdata  = new SkillsDataSetup();
 		$rotamembers = new RotaMembers();
 		$rotadates   = new RotaDataSetup();
@@ -18,7 +19,7 @@ class CompileRotaOptions
 		$this->skills    = $skillsdata->get_skills_for_type($this->type);
 		$this->resources = $rotamembers->get_all();
 		
-		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->type, 1);
+		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->rotaid, 1);
 	}
 
 	function get_colnames()
@@ -61,6 +62,7 @@ class CompileRotaOptions
 		$userids_in_period_for_rota = get_userids_for_period_in_rota($periodid, $type);
 		foreach($this->all_dates as $date)
 		{
+			$date = $date['date'];
 			$row = array();
 			$row['date'] = '<div onClick="onClickActiveRow(this.id);" id = "rota-row-'.$count_date.'">'.$date.'</div>';
 			$row['people'] = array();

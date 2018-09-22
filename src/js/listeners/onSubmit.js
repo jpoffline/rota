@@ -1,5 +1,5 @@
-function onSubmitListen(type, id, name) {
-	
+function onSubmitListen(id) {
+	alert(id);
 	var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -7,7 +7,7 @@ function onSubmitListen(type, id, name) {
                 this.responseText;
         }
     };
-    xhttp.open("GET", "update_ndownloads.php?type=" + type + "&id=" + id + "&name=" + name, true);
+    //xhttp.open("GET", "update_ndownloads.php?type=" + type + "&id=" + id + "&name=" + name, true);
     xhttp.send();
     
 }

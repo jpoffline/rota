@@ -5,7 +5,12 @@ onChangeListen = function(WhichModel, WhichId)
 	if(WhichModel == 'rota')
 	{
 		var items = WhichId.split('-');
-		//alert('ROTA CHANGE: ' + items[0] + items[1] + items[2] + items[3]);
+		var rotaid = items[0];
+		var periodid = items[1];
+		var userid = items[2];
+		var dateid = items[3];
+		var availid = items[4];
+		alert('ROTA CHANGE: ' + WhichId);
 	}
 	//alert(WhichModel);
 }

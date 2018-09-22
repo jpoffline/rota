@@ -26,7 +26,7 @@ include_once('src/php/html_head.php');
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">My availability // <?php echo $CLS_rota_member->get_period_name('music'). ' // '. $CLS_rota_member->num_days_available().' days' ?></div>
-          <button class="btn btn-primary update">Update</button>
+          <button class="btn btn-primary update" id='updateAvailability' onClick='onSubmitListen(this.id);'>Update</button>
             <?php
             
               echo $CLS_rota_member->render_availability();
@@ -38,8 +38,8 @@ include_once('src/php/html_head.php');
 
       <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">My music skills</div>
-            <button class="btn btn-success update">Update</button>
+            <div class="panel-heading">My <?php echo $CLS_rota_member->get_rota_type()?> skills</div>
+            <button class="btn btn-success update" id='updateSkills'>Update</button>
             <?php
 
               echo $CLS_rota_member->render_skills();

@@ -239,11 +239,14 @@ function get_username_for_userid($userid){
 	return sql_get_one($conn, $sql, 'username');
 }
 
-function get_availability_for_userid($userid, $rotaname, $periodid){
+function get_availability_for_userid($userid, $rotaname, $periodid, $availtypeid=1){
 	$sql = "SELECT datestr from rotaavailability
 	inner join rotas on rotas.rotaid = rotaavailability.rotaid
 	inner join dateperiods on rotaavailability.dateid = dateperiods.dateid
-	where userid = ".$userid." and rotaname = '".$rotaname."' and rotaavailability.periodid = ".$periodid;
+	where userid = ".$userid." 
+	and rotaname = '".$rotaname."' 
+	and rotaavailability.periodid = ".$periodid. "
+	and availtypeid = ".$availtypeid."";
 	
 	$conn = GetRotaSQLconn();
 	$v =  $conn->query($sql);
@@ -314,7 +317,8 @@ function get_skillids_for_username_in_rota($userid, $rotaname){
 }
 
 function get_userids_for_period_in_rota($periodid, $rotaid){
-	$sql = "SELECT distinct(rotaavailability.userid) as userids from rotaavailability
+	$sql = "SELECT distinct(rotaavailability.userid) as userids
+	FROM rotaavailability
 	INNER join rotas on rotas.rotaid = rotaavailability.rotaid
 	INNER join periods on periods.periodid = rotaavailability.periodid
 	where periods.periodid=".$periodid."
@@ -330,17 +334,21 @@ function get_userids_for_period_in_rota($periodid, $rotaid){
 }
 
 function get_dates_for_rota_periodid($periodid, $rotaid){
-	$sql = "SELECT dateperiods.datestr as dates from dateperiods
-	INNER join periods on periods.periodid = dateperiods.periodid 
-	INNER join rotas on rotas.rotaid = periods.rotaid
-	where rotas.rotaname = '".$rotaid."' and
-	 dateperiods.periodid = ".$periodid;
+	$sql = "SELECT 
+	dateperiods.datestr AS date, 
+	dateperiods.dateid AS dateid 
+	FROM dateperiods
+	INNER JOIN periods on periods.periodid = dateperiods.periodid 
+	INNER JOIN rotas on rotas.rotaid = periods.rotaid
+	WHERE
+	rotas.rotaid = '".$rotaid."' and
+	dateperiods.periodid = ".$periodid;
 
 	$conn = GetRotaSQLconn();
 	$new_array = [];
 	$v =  $conn->query($sql);
 	while( $row = $v->fetch_assoc()){
-		$new_array[] = $row['dates'];
+		$new_array[] = $row;
 	}
 	return $new_array;
 }

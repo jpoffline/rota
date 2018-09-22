@@ -23,15 +23,14 @@ function Comp_MaterialSwitch_guts($props)
 		$checked = 'checked';
 	}
 	
-	return '
-		<input id="'.$id.'" name="someSwitchOption001" type="checkbox" '.$checked.' onChange="onChangeListen(\'rota\', this.id);"/>
+	return '<input id="'.$id.'" type="checkbox" '.$checked.' onChange="onChangeListen(\'rota\', this.id);"/>
 		<label for="'.$id.'" class="label-'.$type.'"></label>';
 }
 
 function Comp_MaterialSwitch_switch($props)
 {
 	return '
-	<div >
+	<div>
 		'.Comp_MaterialSwitch_guts($props).'
 	</div>';
 }
@@ -62,18 +61,6 @@ class MaterialSwitches
 	
 	function render()
 	{
-		/*$html = '<ul class="list-group">';
-		$count = 0;
-		$id_base = $this->data['groupid'];
-		foreach($this->data['data'] as $item)
-		{
-			$item['id'] = $id_base.$count;
-			$html .= Comp_MaterialSwitch(
-				$item
-			);
-			$count ++;
-		}
-		return $html.'</ul>';*/
 
 		$colnames = array('Skill', 'Have it?');
 		$rows = array();

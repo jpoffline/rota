@@ -10,20 +10,21 @@ class RotaMember extends Rota
 		
 		$this->userid = $userid;
 		$this->rota_type = $rotatype;
+		$this->rotaid = 1;
 		$this->periodid = $periodid;
 		$this->load_memberdata();
 	}
 
 	private function load_memberdata()
 	{
-		$mbd = new RotaMemberData($this->userid);
-		$this->username = $mbd->username();
-		$this->usernamefull = $mbd->usernamefull();
-		$this->skills = $mbd->skills();
-		$this->availability = $mbd->availability($this->rota_type, $this->periodid);
+		$this->mbd          = new RotaMemberData($this->userid);
+		$this->userid       = $this->mbd->userid();
+		$this->username     = $this->mbd->username();
+		$this->usernamefull = $this->mbd->usernamefull();
+		$this->skills       = $this->mbd->skills();
+		$this->availability = $this->mbd->get_datestate($this->rota_type, $this->periodid, 1);
+		$this->confirmed    = $this->mbd->get_datestate($this->rota_type, $this->periodid, 2);
 	}
-
-
 
 	function num_days_available()
 	{
@@ -37,12 +38,26 @@ class RotaMember extends Rota
 
 	function get_availability()
 	{
-		return $this->availability;
+		return $this->get_datedate(1);
+	}
+
+	function get_confirmeddates()
+	{
+		return $this->get_datedate(2);
+	}
+
+	function get_datedate($availtypeid)
+	{
+		return $this->mbd->get_datestate($this->rota_type, $this->periodid, $availtypeid);
 	}
 
 	function get_username()
 	{
 		return $this->username;
+	}
+	function get_userid()
+	{
+		return $this->userid;
 	}
 
 	function get_usernamefull()
@@ -58,7 +73,8 @@ class RotaMember extends Rota
 	function render_availability()
 	{
 		$view_avail = new RotaMemberAvailabilityView(
-			$this,$this->rota_type
+			$this,
+			$this->rotaid
 		);
 		return $view_avail->render();
 	}

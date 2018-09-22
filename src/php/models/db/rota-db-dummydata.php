@@ -75,9 +75,10 @@ function RotaSQL_setDummyInfo()
 	
 	// 	Declare availability for users on rotas.
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,1,1,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,2,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,2,1,2)");
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,3,1,1)");
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,8,1,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,7,1,3)");
 	
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,2,1,1,1)");
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,2,3,1,1)");
@@ -93,6 +94,7 @@ function RotaSQL_setDummyInfo()
 	
 	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('tentative');");
 	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('confirmed');");
+	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('unavailable');");
 
 }
 

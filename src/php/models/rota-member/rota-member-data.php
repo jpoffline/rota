@@ -9,7 +9,6 @@ class RotaMemberData extends RotaMembers
 	{
 		parent::__construct();
 		$this->userid = $userid;
-		//$this->read_from_json();
 		$this->username = get_username_for_userid($this->userid);
 		$this->usernamefull = get_usernamefull_for_userid($this->userid);
 	}
@@ -21,12 +20,17 @@ class RotaMemberData extends RotaMembers
 
 	function username()
 	{
-		return $this->username;//$this->memberdata['username'];
+		return $this->username;
+	}
+
+	function userid()
+	{
+		return $this->userid;
 	}
 
 	function usernamefull()
 	{
-		return $this->usernamefull;//$this->memberdata['usernamefull'];
+		return $this->usernamefull;
 	}
 
 	function skills()
@@ -34,13 +38,21 @@ class RotaMemberData extends RotaMembers
 		$arr = [];
 		$arr['music'] = get_skillids_for_rotaname_userid('music',$this->userid);
 		return $arr;
-		//return $this->memberdata['skills'];
 	}
 
 	function availability($rota_type, $periodid)
 	{
-		return get_availability_for_userid($this->userid, $rota_type, $periodid);
-		//return $this->memberdata['availability'][$rota_type.'-periodid-'.$periodid];
+		return $this->get_datestate($this->userid, $rota_type, $periodid, 1);
+	}
+
+	function confirmed_dates($rota_type, $periodid)
+	{
+		return $this->get_datestate($this->userid, $rota_type, $periodid, 2);
+	}
+
+	function get_datestate($rota_type, $periodid, $availtypeid)
+	{
+		return get_availability_for_userid($this->userid, $rota_type, $periodid, $availtypeid);
 	}
 
 	

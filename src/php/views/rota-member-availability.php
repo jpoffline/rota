@@ -2,29 +2,70 @@
 
 class RotaMemberAvailabilityView
 {
-	private $colnames = array('Date', 'Available');
+	private $colnames = array('Date', 'Available', 'Unavailable','Confirmed');
 	private $avail;
 
-	function __construct(&$member, $type)
+	function __construct(&$member, $rotaid)
 	{
-		$member_availability = $member->get_availability();
-		$member_username = $member->get_username();
-		$rota_dates = $member->get_all_dates($type);
+		$this->id_avail = 1;
+		$this->id_confd = 2;
+		$this->id_unavail = 3;
+		$this->member_availability = $member->get_datedate($this->id_avail);
+		$this->member_confirmed    = $member->get_datedate($this->id_confd);
+		$this->member_unavailable  = $member->get_datedate($this->id_unavail);
+		$this->member_userid     = $member->get_userid();
+		$rota_dates                = $member->get_all_dates($rotaid);
+		$this->rotaid = $rotaid;
+		$this->periodid = $member->periodid;
 
-		$count = 0;
-		foreach($rota_dates as $d)
+		foreach($rota_dates as $date)
 		{
-			$this->avail[] = array(
-				$d, 
-				Comp_MaterialSwitch_switch(
-					array(
-						'id'      => $member_username.'-'.$type.'-avail-'.$count, 
-						'checked' => in_array($d, $member_availability)
-					)
-				)
-			);
-			$count ++;
+			$this->avail[] = $this->_generate_avail_row($date);
 		}
+	}
+
+	private function _generate_avail_row($date)
+	{
+		$date_str = $date['date'];
+		$date_id  = $date['dateid'];
+		$row = array(
+			$date_str, 
+			Comp_MaterialSwitch_switch(
+				array(
+					'id'      => $this->_gen_avail_id($this->id_avail, $date_id),
+					'checked' => in_array($date_str, $this->member_availability)
+				)
+			),
+			Comp_MaterialSwitch_switch(
+				array(
+					'id'      => $this->_gen_avail_id($this->id_unavail, $date_id),
+					'checked' => in_array($date_str, $this->member_unavailable)
+				)
+			),
+			Comp_MaterialSwitch_switch(
+				array(
+					'id'      => $this->_gen_avail_id($this->id_confd, $date_id),
+					'checked' => in_array($date_str, $this->member_confirmed)
+				)
+			)
+			
+		);
+		return $row;
+	}
+
+	private function _gen_avail_id($date_id, $avail_id)
+	{
+		return implode(
+			'-',
+			array(
+				$this->rotaid,
+				$this->periodid,
+				$this->member_userid,
+				$date_id,
+				$avail_id
+			)
+		);
+		
 	}
 
 	function render()
@@ -32,7 +73,7 @@ class RotaMemberAvailabilityView
 		$cls = new Table(
 			array(
 			  'colnames' => $this->colnames,
-			  'rows' => $this->avail
+			  'rows'     => $this->avail
 			)
 		);
 		return $cls->render();
