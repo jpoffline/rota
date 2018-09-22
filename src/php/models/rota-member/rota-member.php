@@ -21,7 +21,7 @@ class RotaMember extends Rota
 		$this->userid       = $this->mbd->userid();
 		$this->username     = $this->mbd->username();
 		$this->usernamefull = $this->mbd->usernamefull();
-		$this->skills       = $this->mbd->skills();
+		$this->skills       = $this->mbd->skills($this->rotaid);
 		$this->availability = $this->mbd->get_datestate($this->rota_type, $this->periodid, 1);
 		$this->confirmed    = $this->mbd->get_datestate($this->rota_type, $this->periodid, 2);
 	}
@@ -33,7 +33,7 @@ class RotaMember extends Rota
 
 	function get_skills($type)
 	{
-		return $this->skills[$type];
+		return $this->skills;
 	}
 
 	function get_availability()
@@ -82,7 +82,7 @@ class RotaMember extends Rota
 	function render_skills()
 	{
 		$view_skills = new RotaMemberSkillsView(
-			$this, $this->rota_type
+			$this, $this->rotaid
 		);
 		return $view_skills->render();
 	}

@@ -16,7 +16,7 @@ class CompileRotaOptions
 		$rotamembers = new RotaMembers();
 		$rotadates   = new RotaDataSetup();
 		
-		$this->skills    = $skillsdata->get_skills_for_type($this->type);
+		$this->skills    = $skillsdata->get_skills_for_type($this->rotaid);
 		$this->resources = $rotamembers->get_all();
 		
 		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->rotaid, 1);

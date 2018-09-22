@@ -33,10 +33,9 @@ class RotaMemberData extends RotaMembers
 		return $this->usernamefull;
 	}
 
-	function skills()
+	function skills($rid)
 	{
-		$arr = [];
-		$arr['music'] = get_skillids_for_rotaname_userid('music',$this->userid);
+		$arr = get_skillids_for_rotaname_userid($rid,$this->userid);
 		return $arr;
 	}
 

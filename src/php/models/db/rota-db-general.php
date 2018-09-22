@@ -211,10 +211,13 @@ function list_availability_for_user_rota_period($username, $rotaname, $periodid)
 	return $new_array;
 }
 
-function list_skills_for_rota($rotaname){
-	$sql = "SELECT skillname as title, skillid as skillid FROM skillstypes 
+function list_skills_for_rota($rotaid){
+	$sql = "SELECT 
+	skillname as title, 
+	skillid as skillid 
+	FROM skillstypes 
 	INNER JOIN rotas on rotas.rotaid = skillstypes.rotaid 
-	where rotaname = '".$rotaname."'";
+	where rotas.rotaid = ".$rotaid;
 	$conn = GetRotaSQLconn();
 	return $conn->query($sql);
 }
@@ -258,11 +261,13 @@ function get_availability_for_userid($userid, $rotaname, $periodid, $availtypeid
 	return $new_array;
 }
 
-function get_skillids_for_rotaname_userid($rotaname, $userid){
-	$sql = "SELECT skillstypes.skillid as skillid from rota.memberskills
+function get_skillids_for_rotaname_userid($rotaid, $userid){
+	$sql = "SELECT 
+	skillstypes.skillid as skillid 
+	from rota.memberskills
 	inner join rota.skillstypes on memberskills.skillid = skillstypes.skillid
 	inner join rota.rotas on rotas.rotaid = skillstypes.rotaid
-	where userid = ".$userid." and rotaname = '".$rotaname."'";
+	where userid = ".$userid." and rotas.rotaid = ".$rotaid."";
 	$conn = GetRotaSQLconn();
 	$v =  $conn->query($sql);
 	$new_array = [];
