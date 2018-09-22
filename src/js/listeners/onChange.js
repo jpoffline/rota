@@ -10,9 +10,13 @@ onChangeListen = function(WhichModel, WhichId)
 		var userid = items[2];
 		var dateid = items[3];
 		var availid = items[4];
-		alert('ROTA CHANGE: ' + WhichId);
+
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.open("POST", "api-recievers.php?type=updateRotaAvail&id=" + WhichId, true);
+		xhttp.send();
+
 	}
-	//alert(WhichModel);
 }
 
 onClickRotaResource = function(id)
