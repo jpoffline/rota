@@ -56,6 +56,7 @@ function RotaSQL_setDummyInfo()
 	$conn->query("INSERT INTO skillstypes (skillname, rotaid) VALUES ('Bass guitar', 1)");
 	$conn->query("INSERT INTO skillstypes (skillname, rotaid) VALUES ('Drums', 1)");
 	$conn->query("INSERT INTO skillstypes (skillname, rotaid) VALUES ('Percussion', 1)");
+	
 	$conn->query("INSERT INTO skillstypes (skillname, rotaid) VALUES ('Leader', 2)");
 	$conn->query("INSERT INTO skillstypes (skillname, rotaid) VALUES ('Helper', 2)");
 	

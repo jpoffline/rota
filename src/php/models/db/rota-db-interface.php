@@ -21,10 +21,10 @@ class RotaDBInterface
 		$this->_create_db();
 		$this->_connect_to_rota_sql();
 
-		$this->RotaDB_rotastbl = new RotaDB_rotastbl($this->sqlconn);
-		$this->RotaDB_periodstbl = new RotaDB_periodstbl($this->sqlconn);
+		$this->RotaDB_rotastbl             = new RotaDB_rotastbl($this->sqlconn);
+		$this->RotaDB_periodstbl           = new RotaDB_periodstbl($this->sqlconn);
 		$this->RotaDB_availabilitytypestbl = new RotaDB_availabilitytypestbl($this->sqlconn);
-		$this->RotaDB_memberstbl = new RotaDB_memberstbl($this->sqlconn);
+		$this->RotaDB_memberstbl           = new RotaDB_memberstbl($this->sqlconn);
 	}
 
 	function add_member(
