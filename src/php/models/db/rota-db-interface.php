@@ -41,8 +41,8 @@ class RotaDBInterface
 		);
 	}
 
-	function add_rota($rotaname){
-		$this->RotaDB_rotastbl->add_rota($rotaname);
+	function add_rota($rotaname, $teamname=''){
+		$this->RotaDB_rotastbl->add_rota($rotaname, $teamname);
 	}
 	
 	function get_all_rotas(){

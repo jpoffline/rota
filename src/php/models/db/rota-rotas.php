@@ -6,8 +6,8 @@ class RotaDB_rotastbl
 	function __construct($conn){
 		$this->conn = $conn;
 	}
-	function add_rota($rotaname){
-		$sql = "INSERT INTO rotas (rotaname) VALUES ('".$rotaname."')";
+	function add_rota($rotaname, $teamname = ''){
+		$sql = "INSERT INTO rotas (rotaname, groupname) VALUES ('".$rotaname."', '".$teamname."')";
 		$this->conn->query($sql);
 	}
 	function get_all(){

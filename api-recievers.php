@@ -1,8 +1,11 @@
 <?php
+
 include_once('src/php/includes.php');
 
+# What type of request was received?
 $type = $_REQUEST["type"];
-$id = $_REQUEST["id"];
+$data = $_REQUEST["data"];
+
 
 
 ?>
