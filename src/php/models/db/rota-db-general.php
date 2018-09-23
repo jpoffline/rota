@@ -191,15 +191,27 @@ function RotaSQL_setuptbls()
 }
 
 
-function list_availability_for_user_rota_period($username, $rotaname, $periodid){
-	$sql = "SELECT rotaname, username, members.userid, datestr AS available, periodname FROM rotaavailability 
+function list_availability_for_user_rota_period(
+	$userid, 
+	$rotaid, 
+	$periodid
+){
+	$sql = "SELECT 
+		rotaname, 
+		username, 
+		members.userid, 
+		datestr AS available, 
+		periodname,
+		availtypeid
+		FROM rotaavailability 
 		INNER JOIN members     ON members.userid = rotaavailability.userid 
 		INNER JOIN rotas       ON rotas.rotaid = rotaavailability.rotaid 
-		INNER JOIN dateperiods ON dateperiods.dateid = rotaavailability.dateid AND dateperiods.periodid = rotaavailability.periodid 
+		INNER JOIN dateperiods ON dateperiods.dateid = rotaavailability.dateid 
+							  AND dateperiods.periodid = rotaavailability.periodid 
 		INNER JOIN periods     ON periods.periodid = rotaavailability.periodid 
 		WHERE 
-			members.username = '".$username."' AND 
-			rotas.rotaname   = '".$rotaname."' AND 
+			members.userid = '".$userid."' AND 
+			rotas.rotaid   = ".$rotaid." AND 
 			periods.periodid = ".$periodid;
 	$conn = GetRotaSQLconn();
 	$v =  $conn->query($sql);
@@ -243,13 +255,13 @@ function get_username_for_userid($userid){
 }
 
 function get_availability_for_userid($userid, $rotaname, $periodid, $availtypeid=1){
-	$sql = "SELECT datestr from rotaavailability
-	inner join rotas on rotas.rotaid = rotaavailability.rotaid
-	inner join dateperiods on rotaavailability.dateid = dateperiods.dateid
-	where userid = ".$userid." 
-	and rotaname = '".$rotaname."' 
-	and rotaavailability.periodid = ".$periodid. "
-	and availtypeid = ".$availtypeid."";
+	$sql = "SELECT datestr FROM rotaavailability
+	INNER JOIN rotas ON rotas.rotaid = rotaavailability.rotaid
+	INNER JOIN dateperiods ON rotaavailability.dateid = dateperiods.dateid
+	WHERE userid = ".$userid." 
+	AND rotaname = '".$rotaname."' 
+	AND rotaavailability.periodid = ".$periodid. "
+	AND availtypeid = ".$availtypeid."";
 	
 	$conn = GetRotaSQLconn();
 	$v =  $conn->query($sql);
@@ -306,12 +318,17 @@ function get_groupname_for_rota($rotaname){
 	}
 }
 
-function get_skillids_for_username_in_rota($userid, $rotaname){
-	$sql = "SELECT memberskills.skillid from rotamembership
-	INNER join memberskills on rotamembership.userid = memberskills.userid
-    inner join members on rotamembership.userid = members.userid
-    inner join rotas on rotamembership.rotaid = rotas.rotaid
-    where rotas.rotaname = '".$rotaname."' and rotamembership.userid = ".$userid;
+function get_skillids_for_username_in_rota($userid, $rotaid){
+	$sql = "SELECT 
+	memberskills.skillid 
+	FROM rotamembership
+	INNER JOIN memberskills ON rotamembership.userid = memberskills.userid
+    INNER JOIN members      ON rotamembership.userid = members.userid
+    INNER JOIN rotas        ON rotamembership.rotaid = rotas.rotaid
+    WHERE 
+	rotas.rotaid = ".$rotaid." 
+	AND rotamembership.userid = ".$userid;
+
 	$conn = GetRotaSQLconn();
 	$new_array = [];
 	$v =  $conn->query($sql);

@@ -78,11 +78,14 @@ class CompileRotaOptions
 				$resource_username = get_username_for_userid($resource_userid);
 				
 				$resource_availability = list_availability_for_user_rota_period(
-					$resource_username,
-					$type,
+					$resource_userid,
+					$this->rotaid,
 					$periodid
 				);
-				$resource_skillids = get_skillids_for_username_in_rota($resource_userid, $type);
+				$resource_skillids = get_skillids_for_username_in_rota(
+					$resource_userid, 
+					$this->rotaid
+				);
 				if(in_array($date, $resource_availability))
 				{
 					$row['people'][] = $resource_username;
