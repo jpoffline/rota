@@ -69,13 +69,14 @@ class CompileRotaOptions
 		{
 			$dateid = $date['dateid'];
 			$date = $date['date'];
-			$row = array();
-			$row['date'] = $this->_gen_div_rota_compiled($dateid, $date);
-			$row['people'] = array();
-			$row['skill'] = array();
+
+			$compiledRotaRow = array();
+			$compiledRotaRow['date'] = $this->_gen_div_rota_compiled($dateid, $date);
+			$compiledRotaRow['people'] = array();
+			$compiledRotaRow['skill'] = array();
 			foreach($this->skills as $s)
 			{
-				$row['skill'][$s['skillid']] = $empty;
+				$compiledRotaRow['skill'][$s['skillid']] = $empty;
 			}
 			$count_res = 0;
 			foreach($userids_in_period_for_rota as $resource)
@@ -83,52 +84,98 @@ class CompileRotaOptions
 				$resource_userid = $resource;
 				$resource_username = get_username_for_userid($resource_userid);
 				
-				$resource_availability = list_availability_for_user_rota_period(
-					$resource_userid,
-					$this->rotaid,
-					$periodid
-				);
+				
 				$resource_skillids = get_skillids_for_username_in_rota(
 					$resource_userid, 
 					$this->rotaid
 				);
-				if(in_array($date, $resource_availability))
-				{
-					$row['people'][] = $resource_username;
-					
-					foreach($this->skills as $a)
-					{
-						$skillid = $a['skillid'];
-						if(in_array($skillid, $resource_skillids))
-						{
-							$uid = implode('-',array($dateid, $resource_userid, $skillid));
-							$resource_toprint = $this->render_resource($uid, $resource_username);
-
-							if($row['skill'][$skillid] !=$empty)
-							{
-								$row['skill'][$skillid].= $delim.$resource_toprint;
-							}
-							else
-							{
-								$row['skill'][$skillid]= $resource_toprint;
-							}
-						}
-			
-					}
-				}
+				
+				$compiledRotaRow = $this->_check_avail(
+					1,
+					$date, 
+					$dateid, 
+					$periodid,
+					$resource_username, 
+					$resource_userid, 
+					$resource_skillids, 
+					$compiledRotaRow
+				);
+				$compiledRotaRow = $this->_check_avail(
+					2,
+					$date, 
+					$dateid, 
+					$periodid,
+					$resource_username, 
+					$resource_userid, 
+					$resource_skillids, 
+					$compiledRotaRow
+				);
 			
 			}
-			$data[] = $row;
+			$data[] = $compiledRotaRow;
 			
 		}
 		
 		return $data;
 	}
 
-	private function render_resource($id, $text)
+	private function _check_avail(
+		$availtype,
+		$date, 
+		$dateid, 
+		$periodid,
+		$resource_username, 
+		$resource_userid, 
+		$resource_skillids, 
+		$compiledRotaRow
+	){
+		$dates = list_availability_for_user_rota_period(
+			$resource_userid,
+			$this->rotaid,
+			$periodid, $availtype
+		);
+		$empty = '-';
+		$delim = ' ';
+		if($this->_is_resource_available($date, $dates))
+		{
+			$compiledRotaRow['people'][] = $resource_username;
+			foreach($this->skills as $skill)
+			{
+				$skillid = $skill['skillid'];
+				if($this->_does_resource_have_skill($skillid, $resource_skillids))
+				{
+					$uid = implode('-',array($dateid, $resource_userid, $skillid));
+					$resource_toprint = $this->render_resource($uid, $resource_username, $availtype);
+					if($compiledRotaRow['skill'][$skillid] !=$empty)
+					{
+						$compiledRotaRow['skill'][$skillid].= $delim.$resource_toprint;
+					}
+					else
+					{
+						$compiledRotaRow['skill'][$skillid]= $resource_toprint;
+					}
+				}
+	
+			}
+		}
+		return $compiledRotaRow;
+	}
+
+	private function _is_resource_available($date, $resource_availability)
+	{
+		return in_array($date, $resource_availability);
+	}
+
+	private function _does_resource_have_skill($skillid, $resource_skillids)
+	{
+		return in_array($skillid, $resource_skillids);
+	}
+
+	private function render_resource($id, $text, $availtype)
 	{
 		$html_tag = 'button';
-		$css_init = 'btn btn-info btn-sm';
+		if($availtype == 1){$css_init = 'btn green btn-info btn-sm';}
+		else if($availtype == 2){$css_init = 'btn orange btn-info btn-sm';}
 		$js_onclick = 'onClickRotaResource(this.id);';
 		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'"onClick="'.$js_onclick.'">'.strToUpper($text).'</'.$html_tag.'>';	
 	}

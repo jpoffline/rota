@@ -194,7 +194,8 @@ function RotaSQL_setuptbls()
 function list_availability_for_user_rota_period(
 	$userid, 
 	$rotaid, 
-	$periodid
+	$periodid,
+	$availtypeid
 ){
 	$sql = "SELECT 
 		rotaname, 
@@ -212,7 +213,8 @@ function list_availability_for_user_rota_period(
 		WHERE 
 			members.userid = '".$userid."' AND 
 			rotas.rotaid   = ".$rotaid." AND 
-			periods.periodid = ".$periodid;
+			periods.periodid = ".$periodid ." AND
+			availtypeid = ".$availtypeid."";
 	$conn = GetRotaSQLconn();
 	$v =  $conn->query($sql);
 	$new_array = [];
