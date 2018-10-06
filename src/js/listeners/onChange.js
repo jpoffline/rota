@@ -22,28 +22,30 @@ onChangeListen = function(WhichModel, WhichId)
 onClickRotaResource = function(id)
 {
 	element = document.getElementById(id);
+	
 	if(element.parentElement.parentElement.classList.contains('editable-row'))
 	{
-	element.classList.toggle("active");
-	icon = to_icon('check');
-	if(element.classList.contains("active"))
-	{
-		element.innerHTML = icon + ' ' + element.innerHTML;
-	}
-	else
-	{
-		element.innerHTML = element.innerHTML.replace(icon + ' ','');
-	}
+		element.classList.toggle("active");
 
-	if(element.classList.contains("btn-info"))
-	{
-		element.classList.replace("btn-info", "btn-sucess");
+		icon = to_icon('check');
+		if(element.classList.contains("active"))
+		{
+			element.innerHTML = icon + ' ' + element.innerHTML;
+		}
+		else
+		{
+			element.innerHTML = element.innerHTML.replace(icon + ' ','');
+		}
+
+		if(element.classList.contains("btn-info"))
+		{
+			element.classList.replace("btn-info", "btn-sucess");
+		}
+		else if(element.classList.contains("btn-sucess"))
+		{
+			element.classList.replace("btn-sucess", "btn-info");
+		}
 	}
-	else if(element.classList.contains("btn-sucess"))
-	{
-		element.classList.replace("btn-sucess", "btn-info");
-	}
-}
 
 }
 

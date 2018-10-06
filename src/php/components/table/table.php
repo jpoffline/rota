@@ -9,11 +9,12 @@ class Table
 	{
 		$this->colnames = $data['colnames'];
 		$this->rows = $data['rows'];
+		$this->tableid = $data['id'];
 	}
 
 	function render()
 	{
-		return '<table class="table">'.$this->_generate_header().
+		return '<table class="table" id="'.$this->tableid.'">'.$this->_generate_header().
 		$this->_generate_rows(). '</table>';
 	}
 

@@ -39,10 +39,13 @@ class RotaMembersAllView
 		$cls = new Table(
 			array(
 			  'colnames' => $dd->get_colnames(),
-			  'rows' => $data
+			  'rows' => $data,
+			  'id' => 'compiled-'.$this->rotaname.'-'.$this->periodid
 			)
 		);
-		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1><h2>View: availability of skill sets</h2>'
+		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1>'.
+				'<h2>View: availability of skill sets <button class="btn btn-primary" 
+				onClick="onSubmitSaveRotaOptions(this.id)" id="'.$this->rotaname.'-'.$this->periodid.'">save</button></h2>'
 					.$cls->render();
 	}
 

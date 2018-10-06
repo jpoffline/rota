@@ -174,10 +174,10 @@ class CompileRotaOptions
 	private function render_resource($id, $text, $availtype)
 	{
 		$html_tag = 'button';
-		if($availtype == 1){$css_init = 'btn green btn-info btn-sm';}
-		else if($availtype == 2){$css_init = 'btn orange btn-info btn-sm';}
+		if($availtype == 1){$css_init = 'btn btn-info btn-sm';}
+		else if($availtype == 2){$css_init = 'btn btn-danger btn-sm';}
 		$js_onclick = 'onClickRotaResource(this.id);';
-		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'"onClick="'.$js_onclick.'">'.strToUpper($text).'</'.$html_tag.'>';	
+		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'"onClick="'.$js_onclick.'"><i id = "'.$id.'"></i>'.strToUpper($text).'</'.$html_tag.'>';	
 	}
 	
 	
