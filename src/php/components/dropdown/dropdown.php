@@ -1,8 +1,8 @@
 <?php
 
-function dropdown($data, $key, $value)
+function dropdown($data, $key, $value, $id, $onChange='dropDownChange')
 {
-	$dd= "<select>";
+	$dd= "<select id = '".$id."' onChange='".$onChange."(this.id);'>";
 		
 	foreach($data as $r){
 		$dd.= '<option value = "'.$r[$key].'">'.$r[$value].'</option>';

@@ -9,9 +9,9 @@ class Rota
 		$this->skillsdata = new SkillsDataSetup();
 	}
 
-	function get_period_name($type)
+	function get_period_name($typeid)
 	{
-		return $this->rotadates->get_periodname_for_type($type);
+		return $this->rotadates->get_periodname_for_type($typeid);
 	}
 
 	function get_all_dates($type)

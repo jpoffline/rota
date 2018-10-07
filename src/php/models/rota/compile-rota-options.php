@@ -8,10 +8,10 @@ class CompileRotaOptions
 	private $skills;
 	
 
-	function __construct($rotaname)
+	function __construct($rotaname, $rotaid)
 	{
 		$this->type = $rotaname;
-		$this->rotaid = 1;
+		$this->rotaid = 1;//$rotaid;
 		$skillsdata  = new SkillsDataSetup();
 		$rotamembers = new RotaMembers();
 		$rotadates   = new RotaDataSetup();
@@ -177,7 +177,8 @@ class CompileRotaOptions
 		if($availtype == 1){$css_init = 'btn btn-info btn-sm';}
 		else if($availtype == 2){$css_init = 'btn btn-danger btn-sm';}
 		$js_onclick = 'onClickRotaResource(this.id);';
-		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'"onClick="'.$js_onclick.'"><i id = "'.$id.'"></i>'.strToUpper($text).'</'.$html_tag.'>';	
+		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'" onClick="'.$js_onclick.'">'.
+			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text).'</'.$html_tag.'>';	
 	}
 	
 	

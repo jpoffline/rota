@@ -8,13 +8,15 @@ class RotaMembersAllView
 	private $periodinfo;
 	function __construct(
 		$rotaname,
+		$rotaid,
 		$periodid
 	)
 	{
 		$this->rotaname = $rotaname;
 		$this->periodid = $periodid;
+		$this->rotaid   = $rotaid;
 		$this->periodinfo = get_periodname_for_type(
-			$this->rotaname,
+			$this->rotaid,
 			$this->periodid
 		);
 		$this->groupname = get_groupname_for_rota($this->rotaname);
@@ -32,7 +34,8 @@ class RotaMembersAllView
 
 	function render()
 	{
-		$dd = new CompileRotaOptions($this->rotaname);
+		
+		$dd = new CompileRotaOptions($this->rotaname, $this->rotaid);
 		
 		$data = $dd->get_compiled_rota($this->periodid);
 

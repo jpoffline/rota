@@ -26,7 +26,7 @@ onClickRotaResource = function(id)
 	if(element.parentElement.parentElement.classList.contains('editable-row'))
 	{
 		element.classList.toggle("active");
-
+		/*
 		icon = to_icon('check');
 		if(element.classList.contains("active"))
 		{
@@ -35,8 +35,13 @@ onClickRotaResource = function(id)
 		else
 		{
 			element.innerHTML = element.innerHTML.replace(icon + ' ','');
-		}
-
+		}*/
+		//element.classList.toggle("fa fa-check");
+		console.log(element);
+		//console.log(element.getElementById(id+'-icon'));
+		
+		
+		
 		if(element.classList.contains("btn-info"))
 		{
 			element.classList.replace("btn-info", "btn-sucess");
@@ -54,4 +59,23 @@ onClickActiveRow = function(id)
 	element = document.getElementById(id);
 	element.parentElement.parentElement.classList.toggle('table-warning');
 	element.parentElement.parentElement.classList.toggle('editable-row');
+}
+
+dropDownChange = function(id)
+{
+	var selection = getSelectedOption(document.getElementById(id));
+	alert(
+		selection.value
+	);
+}
+
+getSelectedOption = function(sel){
+	var opt;
+	for ( var i = 0, len = sel.options.length; i < len; i++ ) {
+		opt = sel.options[i];
+		if ( opt.selected === true ) {
+			return opt;
+		}
+	}
+	return opt;
 }

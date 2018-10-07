@@ -7,7 +7,7 @@ function onSubmitSaveRotaOptions(id)
     var items = id.split('-');
     var rota = items[0];
     var periodid = items[1];
-    var table = document.getElementById('compiled-'+id);//.getElementsByTagName('tbody')[0];
+    var table = document.getElementById('compiled-'+id);
     
     var tds = table.getElementsByTagName("td");
 
