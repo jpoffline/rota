@@ -18,15 +18,15 @@ include_once('src/php/html_head.php');
           'selection_rotas'
         );
         echo dropdown(
-          $r1->get_periods_for_rota('music'),
+          $r1->get_periods_for_rota(1),
           'periodid',
           'periodname',
           'selection_periods'
         );
       ?>
-
+        <button class = "btn btn-primary" id = "showRotaCompiled" onClick="showRotaCompiled()">Show</button>
     <?php
-      $cls = new RotaMembersAllView('music',1, 1);
+      $cls = new RotaMembersAllView(1, 1);
       echo $cls->render();
     ?>
 

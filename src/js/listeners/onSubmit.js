@@ -66,3 +66,10 @@ function sendToBackend(route, data) {
     xhr.send();
 
 }
+
+function showRotaCompiled()
+{
+    var o1 = getDropdownValue('selection_rotas');
+    var o2 = getDropdownValue('selection_periods');
+    alert(o1 + o2);
+}

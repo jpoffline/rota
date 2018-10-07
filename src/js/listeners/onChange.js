@@ -61,12 +61,17 @@ onClickActiveRow = function(id)
 	element.parentElement.parentElement.classList.toggle('editable-row');
 }
 
+getDropdownValue = function(id)
+{
+	return getSelectedOption(document.getElementById(id)).value;
+}
+
 dropDownChange = function(id)
 {
 	var selection = getSelectedOption(document.getElementById(id));
-	alert(
+	/*alert(
 		selection.value
-	);
+	);*/
 }
 
 getSelectedOption = function(sel){

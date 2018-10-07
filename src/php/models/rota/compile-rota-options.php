@@ -8,10 +8,10 @@ class CompileRotaOptions
 	private $skills;
 	
 
-	function __construct($rotaname, $rotaid)
+	function __construct($rotaid, $periodid)
 	{
-		$this->type = $rotaname;
-		$this->rotaid = 1;//$rotaid;
+		$this->rotaid = $rotaid;
+		$this->periodid = $periodid;
 		$skillsdata  = new SkillsDataSetup();
 		$rotamembers = new RotaMembers();
 		$rotadates   = new RotaDataSetup();
@@ -19,7 +19,7 @@ class CompileRotaOptions
 		$this->skills    = $skillsdata->get_skills_for_type($this->rotaid);
 		$this->resources = $rotamembers->get_all();
 		
-		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->rotaid, 1);
+		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->rotaid, $this->periodid);
 	}
 
 	function get_colnames()
@@ -57,14 +57,14 @@ class CompileRotaOptions
 
 	private function who_available_when($periodid)
 	{
-		$type = $this->type;
+		$type =$this->rotaid;
 		 
 		$empty = '-';
 		$delim = ' ';
 		$data = array();
 
 		
-		$userids_in_period_for_rota = get_userids_for_period_in_rota($periodid, $type);
+		$userids_in_period_for_rota = get_userids_for_period_in_rotaid($periodid, $type);
 		foreach($this->all_dates as $date)
 		{
 			$dateid = $date['dateid'];

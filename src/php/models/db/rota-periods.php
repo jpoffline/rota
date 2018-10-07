@@ -15,7 +15,7 @@ class RotaDB_periodstbl{
 	function get_all_for_rota($rotaname){
 		$sql = "SELECT * FROM periods
 		 INNER join rotas on rotas.rotaid = periods.rotaid
-		 where rotas.rotaname = '".$rotaname."'";
+		 where rotas.rotaid = ".$rotaname."";
 		return $this->conn->query($sql);
 	}
 

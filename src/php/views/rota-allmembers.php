@@ -7,19 +7,17 @@ class RotaMembersAllView
 	private $groupname;
 	private $periodinfo;
 	function __construct(
-		$rotaname,
 		$rotaid,
 		$periodid
 	)
 	{
-		$this->rotaname = $rotaname;
 		$this->periodid = $periodid;
 		$this->rotaid   = $rotaid;
 		$this->periodinfo = get_periodname_for_type(
 			$this->rotaid,
 			$this->periodid
 		);
-		$this->groupname = get_groupname_for_rota($this->rotaname);
+		$this->groupname = get_groupname_for_rota($this->rotaid);
 	}
 
 	function gen_colnames($skills)
@@ -35,7 +33,7 @@ class RotaMembersAllView
 	function render()
 	{
 		
-		$dd = new CompileRotaOptions($this->rotaname, $this->rotaid);
+		$dd = new CompileRotaOptions($this->rotaid, $this->periodid);
 		
 		$data = $dd->get_compiled_rota($this->periodid);
 
@@ -43,12 +41,12 @@ class RotaMembersAllView
 			array(
 			  'colnames' => $dd->get_colnames(),
 			  'rows' => $data,
-			  'id' => 'compiled-'.$this->rotaname.'-'.$this->periodid
+			  'id' => 'compiled-'.$this->rotaid.'-'.$this->periodid
 			)
 		);
 		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1>'.
 				'<h2>View: availability of skill sets <button class="btn btn-primary" 
-				onClick="onSubmitSaveRotaOptions(this.id)" id="'.$this->rotaname.'-'.$this->periodid.'">save</button></h2>'
+				onClick="onSubmitSaveRotaOptions(this.id)" id="'.$this->rotaid.'-'.$this->periodid.'">save</button></h2>'
 					.$cls->render();
 	}
 

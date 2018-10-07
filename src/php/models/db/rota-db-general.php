@@ -308,7 +308,7 @@ function get_periodname_for_type($type, $periodidx){
 }
 
 function get_groupname_for_rota($rotaname){
-	$sql = "select groupname from rotas where rotaname='".$rotaname."';";
+	$sql = "select groupname from rotas where rotaid=".$rotaname.";";
 	$conn = GetRotaSQLconn();
 	
 	$v =  $conn->query($sql);
@@ -340,13 +340,13 @@ function get_skillids_for_username_in_rota($userid, $rotaid){
 	return $new_array;
 }
 
-function get_userids_for_period_in_rota($periodid, $rotaid){
+function get_userids_for_period_in_rotaid($periodid, $rotaid){
 	$sql = "SELECT distinct(rotaavailability.userid) as userids
 	FROM rotaavailability
 	INNER join rotas on rotas.rotaid = rotaavailability.rotaid
 	INNER join periods on periods.periodid = rotaavailability.periodid
 	where periods.periodid=".$periodid."
-	and rotas.rotaname = '".$rotaid."'";
+	and rotas.rotaid = ".$rotaid."";
 	
 	$conn = GetRotaSQLconn();
 	$new_array = [];
