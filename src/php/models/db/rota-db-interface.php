@@ -57,6 +57,16 @@ class RotaDBInterface
 		return $this->RotaDB_periodstbl->get_all_for_rota($rotaname);
 	}
 
+	function get_periods_for_rota_as_dropdown($rotaname, $did){
+		$periods = $this->get_periods_for_rota($rotaname);
+		return dropdown(
+			$periods,
+			'periodid',
+			'periodname',
+			$did
+		);
+	}
+
 	function get_periods(){
 		return $this->RotaDB_periodstbl->get_all();
 	}

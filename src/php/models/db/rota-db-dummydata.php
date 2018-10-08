@@ -23,21 +23,27 @@ function RotaSQL_setDummyInfo()
 	$conn->query("INSERT INTO periods (rotaid, periodname) VALUES (2,'Spring 2019')");
 	
 	// 	Define dates for periods
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'02/09/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'09/09/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'16/09/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'23/09/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'30/09/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'07/10/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'14/10/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'21/10/2018')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'28/10/2018')");
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'02/09/2018')"); //1
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'09/09/2018')"); //2
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'16/09/2018')"); //3
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'23/09/2018')"); //4
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'30/09/2018')"); //5
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'07/10/2018')"); //6
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'14/10/2018')"); //7
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'21/10/2018')"); //8
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (1,'28/10/2018')"); //9
 
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'02/09/2019')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'09/09/2019')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'16/09/2019')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'23/09/2019')");
-	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'30/09/2019')");
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (2,'02/02/2019')"); //10
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (2,'09/02/2019')"); //11
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (2,'16/02/2019')"); //12
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (2,'23/02/2019')"); //13
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (2,'30/02/2019')"); //14
+
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'02/09/2019')"); //15
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'09/09/2019')"); //16
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'16/09/2019')"); //17
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'23/09/2019')"); //18
+	$conn->query("INSERT INTO dateperiods (periodid, datestr) VALUES (3,'30/09/2019')"); //19
 	
 	// 	Link members to rotas
 	$conn->query("INSERT INTO rotamembership (rotaid, userid) VALUES (1,1)");
@@ -88,9 +94,17 @@ function RotaSQL_setDummyInfo()
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,3,3,1,1)");
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,3,5,1,1)");
 
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,5,3,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,6,3,1)");
-	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,7,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,10,2,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,11,2,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (1,1,13,2,1)");
+
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,4,15,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,4,16,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,4,17,3,1)");
+
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,16,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,18,3,1)");
+	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,19,3,1)");
 	
 	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('tentative');");
 	$conn->query("INSERT INTO availabilitytypes (availtype) VALUES ('confirmed');");

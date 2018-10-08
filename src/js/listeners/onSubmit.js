@@ -52,7 +52,7 @@ function addRotaName(id) {
     );
 }
 
-function sendToBackend(route, data) {
+function sendToBackend(route, data, resp = '') {
 
     data = {
         "route": route,
@@ -61,6 +61,15 @@ function sendToBackend(route, data) {
 
     var xhr = new XMLHttpRequest();
     var url = "api-recievers-json.php?data=" + JSON.stringify(data);
+    if(resp != '')
+    {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById(resp).innerHTML =
+                    this.responseText;
+            }
+        };
+    }
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
@@ -69,7 +78,16 @@ function sendToBackend(route, data) {
 
 function showRotaCompiled()
 {
-    var o1 = getDropdownValue('selection_rotas');
-    var o2 = getDropdownValue('selection_periods');
-    alert(o1 + o2);
+    var rotaid = getDropdownValue('selection_rotas');
+    var periodid = getDropdownValue('selection_periods');
+    //document.getElementById('area_compiledRotaView').innerHTML = "<b>HI</b>";
+    //alert(rotaid + periodid);
+    sendToBackend(
+        'showCompiledRota',
+        {
+            'rotaid':rotaid,
+            'periodid':periodid
+        },
+        'area_compiledRotaView'
+    );
 }

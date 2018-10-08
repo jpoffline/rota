@@ -74,6 +74,20 @@ dropDownChange = function(id)
 	);*/
 }
 
+onChange_rotaid = function(id)
+{
+	var selection = getSelectedOption(document.getElementById(id));
+	var rotaid = selection.value;
+	sendToBackend(
+        'getPeriodsForRotaid',
+        {
+			'rotaid':rotaid,
+			'dropdown_id':'selection_periods'
+        },
+        'dd_periods_for_rota'
+    );
+}
+
 getSelectedOption = function(sel){
 	var opt;
 	for ( var i = 0, len = sel.options.length; i < len; i++ ) {
