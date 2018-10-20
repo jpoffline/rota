@@ -21,7 +21,7 @@ include_once('src/php/html_head.php');
         );
         
       ?>
-        <div id = 'dd_periods_for_rota'></div>
+        <div id = 'dd_periods_for_rota' ></div>
         <button class = "btn btn-primary" id = "showRotaCompiled" onClick="showRotaCompiled()">Show</button>
         <div id = 'area_compiledRotaView'></div>
 

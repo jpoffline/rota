@@ -6,20 +6,34 @@ include_once('src/php/includes.php');
 <?php
 include_once('src/php/html_head.php');
 ?>
+
 	<div class='container'>
 
     <?php
-    $userid = 1;
-    $periodid = '1';
+      $userid = 1;
+      $periodid = '1';
       $CLS_rota_member = new RotaMember($userid, $periodid, 'music');
     ?>
 
 		<h1>
 			Member: <?php echo $CLS_rota_member->get_usernamefull()?>
-		</h1>
-    <h1>
+      //
 			Rota: <?php echo $CLS_rota_member->get_rota_type()?>
 		</h1>
+    <?php
+      echo button('myModal-show', 'View and edit my skills', 'danger');
+    ?>
+    
+    <?php
+      echo modal(
+        $id     = 'myModal',
+        $header = 'My '.$CLS_rota_member->get_rota_type().' skills',
+        $body   = $CLS_rota_member->render_skills(),
+        $footer = button('updateSkills', 'Update', 'success update')
+      );
+    ?>
+
+    
 
 		<div class="row">
         
@@ -40,18 +54,8 @@ include_once('src/php/html_head.php');
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">My <?php echo $CLS_rota_member->get_rota_type()?> skills</div>
-            <button class="btn btn-success update" id='updateSkills'>Update</button>
-            <?php
-
-              echo $CLS_rota_member->render_skills();
-
-            ?>
-          </div>
-          
-        </div>
+   
+      
       </div>
 
 	  </div>

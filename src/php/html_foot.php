@@ -6,6 +6,12 @@ echo '    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integri
 <script src = "src/js/listeners/onChange.js"></script>
 <script src = "src/js/listeners/onSubmit.js"></script>
 <script src = "src/js/components/icons.js"></script>
+<script src = "src/js/components/modal.js"></script>
+<script src = "src/js/tabset/tabset.js"></script>
+<script>
+onChange_rotaid("selection_rotas");
+
+</script>
 </body>
 </html>';
 

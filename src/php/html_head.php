@@ -18,6 +18,8 @@ echo '
     <link rel="stylesheet" href="src/css/components/table.css">
     <link rel="stylesheet" href="src/css/components/panels.css">
     <link rel="stylesheet" href="src/css/components/buttons.css">
+    <link rel="stylesheet" href="src/css/components/modal.css">
+    <link rel="stylesheet" href="src/css/tabset/tabset.css">
     <title>SHBC::rota</title>
   </head>
   <body>

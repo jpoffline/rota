@@ -1,5 +1,7 @@
 <?php
 include_once('src/php/lib/json.php');
+include_once('src/php/components/modal/modal.php');
+include_once('src/php/components/buttons/button.php');
 include_once('src/php/components/material-switch/material-switch.php');
 include_once('src/php/components/table/table.php');
 include_once('src/php/components/icons/icon.php');
