@@ -4,17 +4,21 @@ onChangeListen = function(WhichModel, WhichId)
 {
 	if(WhichModel == 'rota')
 	{
-		var items = WhichId.split('-');
-		var rotaid   = items[0];
-		var periodid = items[1];
-		var userid   = items[2];
-		var dateid   = items[3];
-		var availid  = items[4];
-
-		var xhttp = new XMLHttpRequest();
-		
-		xhttp.open("POST", "api-recievers.php?type=updateRotaAvail&id=" + WhichId, true);
-		xhttp.send();
+		if(document.getElementById(WhichId).checked)
+		{
+			newState = '1';
+		}
+		else
+		{
+			newState = '0';
+		}
+		sendToBackend(
+			'updateRotaAvail',
+			{
+				'updateDate': WhichId,
+				'newState' : newState
+			}
+		)
 
 	}
 }

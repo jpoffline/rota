@@ -42,7 +42,7 @@ include_once('src/php/html_head.php');
 
 			<div class="col-md-6">
 				<div class="panel panel-default">
-					<div class="panel-heading">Availablity types</div>
+					<div class="panel-heading">Availability types</div>
 					
 					<?php
 						echo sqltbl_to_html($RotaDBInterface->get_all_availabilitytypes());

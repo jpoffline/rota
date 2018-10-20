@@ -70,6 +70,7 @@ function sendToBackend(route, data, resp = '') {
             }
         };
     }
+    console.log(data);
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();

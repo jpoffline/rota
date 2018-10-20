@@ -11,7 +11,7 @@ include_once('src/php/html_head.php');
 
     <?php
       $userid = 1;
-      $periodid = '1';
+      $periodid = 1;
       $CLS_rota_member = new RotaMember($userid, $periodid, 'music');
     ?>
 
@@ -40,10 +40,11 @@ include_once('src/php/html_head.php');
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">My availability // 
-          <?php 
-            echo $CLS_rota_member->get_period_name(1). ' // '. 
-                 $CLS_rota_member->num_days_available().' days' 
-          ?></div>
+            <?php 
+              echo $CLS_rota_member->get_period_name($periodid). ' // '. 
+                   $CLS_rota_member->num_days_available().' days' 
+            ?>
+          </div>
           <button class="btn btn-primary update" id='updateAvailability' onClick='onSubmitListen(this.id, this.id);'>Update</button>
             <?php
             

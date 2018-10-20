@@ -67,6 +67,29 @@ class RotaDBInterface
 		);
 	}
 
+	function set_user_availabilty($opts, $newState = 1){
+		$fmt = "csv";
+		if($newState == 0)
+		{
+			$fmt = "sep-and";
+		}
+		$opts = deparseAvailabilityString($opts, $format = $fmt);
+		if($newState == 1)
+		{
+			$qy = "INSERT INTO rotaavailability (".namesAvailabilityString().") VALUES (".$opts.")";
+		}
+		else
+		{
+			$qy = "DELETE FROM rotaavailability WHERE ".$opts. ";";
+		}
+		writeToLog($qy);
+		$this->sqlconn->query($qy);
+	}
+
+	function remove_user_availabilty($opts){
+
+	}
+
 	function get_periods(){
 		return $this->RotaDB_periodstbl->get_all();
 	}

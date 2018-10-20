@@ -1,4 +1,5 @@
 <?php
+include_once('version.php');
 include_once('src/php/lib/json.php');
 include_once('src/php/components/modal/modal.php');
 include_once('src/php/components/buttons/button.php');
@@ -27,6 +28,7 @@ include_once('src/php/models/db/rota-rotas.php');
 include_once('src/php/models/db/rota-periods.php');
 include_once('src/php/models/db/rota-members.php');
 include_once('src/php/models/db/rota-availiabilitytypes.php');
+include_once('src/php/models/rota-member/availability-string.php');
 RotaSQL_setupdb();
 
 $RESET = false;

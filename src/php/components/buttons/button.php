@@ -1,8 +1,13 @@
 <?php
 
-function button($id, $text, $class = 'primary')
+function button($id, $text, $class = 'primary', $onclick='')
 {
-	return '<button id="'.$id.'" class="btn btn-'.$class.'">'.$text.'</button>';
+	$btn = '<button id="'.$id.'" class="btn btn-'.$class.'"';
+	if($onclick != '')
+	{
+		$btn .= ' onClick="'.$onclick.'"';
+	}
+	return $btn.'>'.$text.'</button>';
 }
 
 
