@@ -26,7 +26,8 @@ class RotaMemberSkillsView
 					array(
 						'id'      => $this->_gen_skillsrow_id($skill_id),
 						'checked' => in_array($skill_id, $member_skills)
-					)
+					),
+					"rota-memberskill"
 				)
 			);
 		}
@@ -35,15 +36,12 @@ class RotaMemberSkillsView
 
 	private function _gen_skillsrow_id($skillid)
 	{
-		return implode(
-			'-',
-			array(
-				'skills',
-				$this->member_userid,
+		return generateSkillsString(
+			$this->member_userid,
 				$this->rotaid,
 				$skillid
-			)
 		);
+		
 	}
 
 	function render()

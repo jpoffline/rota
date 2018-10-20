@@ -1,6 +1,5 @@
 <?php
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 FILENAME: api-recievers-json.php
@@ -16,7 +15,8 @@ header("Content-Type: application/json");
 $data = json_decode($_REQUEST["data"]);
 
 $route = $data->{"route"};
-writeToLog('route from js: '.$route);
+writeToLog('ROUTE '.$route);
+
 if($route == "newRota")
 {
 	$db = new RotaDBInterface();
@@ -54,7 +54,23 @@ else if($route == "updateRotaAvail")
 	);
 	
 }
+else if($route == "updateMemberSkill")
+{
+	$updateSkill = $data->{"data"}->{"updateSkill"};
+	$newState = $data->{"data"}->{"newState"};
+	writeToLog('updating user skill: '. $updateSkill);
+	writeToLog('new state: '.$newState);
 
+	$r1 = new RotaDBInterface();
+	$r1->set_user_skills(
+		$updateSkill,
+		$newState
+	);
+}
+else
+{
+	writeToLog('unknown route requested');
+}
 
 
 ?>

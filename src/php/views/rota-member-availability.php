@@ -2,7 +2,7 @@
 
 class RotaMemberAvailabilityView
 {
-	private $colnames = array('Date', 'Available', 'Unavailable','Confirmed');
+	private $colnames = array('Date', 'Available','Confirmed');
 	private $avail;
 
 	function __construct(&$member, $rotaid)
@@ -36,12 +36,7 @@ class RotaMemberAvailabilityView
 					'checked' => in_array($date_str, $this->member_availability)
 				)
 			),
-			Comp_MaterialSwitch_switch(
-				array(
-					'id'      => $this->_gen_avail_id($date_id, $this->id_unavail),
-					'checked' => in_array($date_str, $this->member_unavailable)
-				)
-			),
+			
 			Comp_MaterialSwitch_switch(
 				array(
 					'id'      => $this->_gen_avail_id($date_id, $this->id_confd),

@@ -3,7 +3,7 @@
 
 # see https://bootsnipp.com/snippets/featured/material-design-switch
 
-function Comp_MaterialSwitch_guts($props)
+function Comp_MaterialSwitch_guts($props, $route = "rota")
 {
 	$id = $props['id'];
 	$type = $props['type'];
@@ -23,15 +23,15 @@ function Comp_MaterialSwitch_guts($props)
 		$checked = 'checked';
 	}
 	
-	return '<input id="'.$id.'" type="checkbox" '.$checked.' onChange="onChangeListen(\'rota\', this.id);"/>
+	return '<input id="'.$id.'" type="checkbox" '.$checked.' onChange="onChangeListen(\''.$route.'\', this.id);"/>
 		<label for="'.$id.'" class="label-'.$type.'"></label>';
 }
 
-function Comp_MaterialSwitch_switch($props)
+function Comp_MaterialSwitch_switch($props, $route = "rota")
 {
 	return '
 	<div>
-		'.Comp_MaterialSwitch_guts($props).'
+		'.Comp_MaterialSwitch_guts($props, $route).'
 	</div>';
 }
 

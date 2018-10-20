@@ -21,6 +21,24 @@ onChangeListen = function(WhichModel, WhichId)
 		)
 
 	}
+	else if(WhichModel == 'rota-memberskill')
+	{
+		if(document.getElementById(WhichId).checked)
+		{
+			newState = '1';
+		}
+		else
+		{
+			newState = '0';
+		}
+		sendToBackend(
+			'updateMemberSkill',
+			{
+				'updateSkill': WhichId,
+				'newState' : newState
+			}
+		)
+	}
 }
 
 onClickRotaResource = function(id)

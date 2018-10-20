@@ -28,7 +28,8 @@ include_once('src/php/html_head.php');
             $id      = 'showRotaCompiled', 
             $text    = 'Show', 
             $class   = 'primary', 
-            $onclick = 'showRotaCompiled()'
+            $onclick = 'showRotaCompiled()',
+            $icon = iconDespatch('view')
           );
         ?>
 

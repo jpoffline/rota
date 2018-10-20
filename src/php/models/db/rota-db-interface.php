@@ -68,26 +68,23 @@ class RotaDBInterface
 	}
 
 	function set_user_availabilty($opts, $newState = 1){
-		$fmt = "csv";
-		if($newState == 0)
-		{
-			$fmt = "sep-and";
-		}
-		$opts = deparseAvailabilityString($opts, $format = $fmt);
-		if($newState == 1)
-		{
-			$qy = "INSERT INTO rotaavailability (".namesAvailabilityString().") VALUES (".$opts.")";
-		}
-		else
-		{
-			$qy = "DELETE FROM rotaavailability WHERE ".$opts. ";";
-		}
-		writeToLog($qy);
-		$this->sqlconn->query($qy);
+
+		$this->_set_update_db_data(
+			'rotaavailability', 
+			$opts, 
+			$newState
+		);
+		
 	}
 
-	function remove_user_availabilty($opts){
-
+	function set_user_skills($opts, $newState = 1){
+		
+		$this->_set_update_db_data(
+			'memberskills', 
+			$opts, 
+			$newState
+		);
+		
 	}
 
 	function get_periods(){
@@ -119,7 +116,77 @@ class RotaDBInterface
 			$this->has_error = true;
 		}
 	}
+
+	private function _set_update_db_data($tableName, $opts, $newState)
+	{
+
+		
+		if($newState == 0)
+		{
+			$fmt = "sep-and";
+		}
+		else if($newState == 1)
+		{
+			$fmt = "csv";
+		}
+		else
+		{
+			writeToLog('INVALID newState: '. $newState);
+		}
+
+		$opts = deparseDespatch($tableName, $opts, $format = $fmt);
+		$nams = namesGenerateDespatch($tableName);
+
+		if($newState == 1)
+		{
+			$qy = "INSERT INTO ".$tableName." (".$names.") VALUES (".$opts.")";
+		}
+		else if($newState == 0)
+		{
+			$qy = "DELETE FROM ".$tableName." WHERE ".$opts. ";";
+		}
+		else
+		{
+			writeToLog('INVALID newState: '. $newState);
+		}
+
+		writeToLog($qy);
+
+		$this->sqlconn->query($qy);
+		
+	}
 }
 
+function deparseDespatch($type, $opts, $format)
+{
+	if($type == "rotaavailability")
+	{
+		return deparseAvailabilityString($opts, $format);
+	}
+	else if($type == "memberskills")
+	{
+		return deparseSkillsString($opts, $format);
+	}
+	else
+	{
+		writeToLog('INVALID deparseDespatch type: '. $type);
+	}
+}
+
+function namesGenerateDespatch($type)
+{
+	if($type == "rotaavailability")
+	{
+		return namesAvailabilityString();
+	}
+	else if($type == "memberskills")
+	{
+		return namesSkillsString();
+	}
+	else
+	{
+		writeToLog('INVALID namesGenerateDespatch type: '. $type);
+	}
+}
 
 ?>

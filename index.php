@@ -21,7 +21,13 @@ include_once('src/php/html_head.php');
 			Rota: <?php echo $CLS_rota_member->get_rota_type()?>
 		</h1>
     <?php
-      echo button('myModal-show', 'View and edit my skills', 'danger');
+      echo button(
+        $id      = 'myModal-show', 
+        $text    = 'View and edit my skills', 
+        $class   = 'danger', 
+        $onclick = '',
+        $icon    = iconDespatch('skills')
+      );
     ?>
     
     <?php
@@ -29,7 +35,7 @@ include_once('src/php/html_head.php');
         $id     = 'myModal',
         $header = 'My '.$CLS_rota_member->get_rota_type().' skills',
         $body   = $CLS_rota_member->render_skills(),
-        $footer = button('updateSkills', 'Update', 'success update')
+        $footer = ''
       );
     ?>
 
@@ -45,9 +51,8 @@ include_once('src/php/html_head.php');
                    $CLS_rota_member->num_days_available().' days' 
             ?>
           </div>
-          <button class="btn btn-primary update" id='updateAvailability' onClick='onSubmitListen(this.id, this.id);'>Update</button>
+         
             <?php
-            
               echo $CLS_rota_member->render_availability();
 
             ?>
