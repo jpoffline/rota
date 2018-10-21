@@ -144,11 +144,11 @@ class RotaDBInterface
 	{
 		if($newState == 1)
 		{
-			$qy = "INSERT INTO ".$tableName." (".$names.") VALUES (".$opts.")";
+			$qy = sqlfactory_insert($tableName, $names, $opts);
 		}
 		else if($newState == 0)
 		{
-			$qy = "DELETE FROM ".$tableName." WHERE ".$opts. ";";
+			$qy = sqlfactory_delete($tableName, $opts);
 		}
 		else
 		{
