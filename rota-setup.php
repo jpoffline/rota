@@ -25,18 +25,42 @@ include_once('src/php/html_head.php');
 			
 			<div class="col-md-6">
 				<div class="panel panel-default">
-					<div class="panel-heading">Rota types</div>
+					<div class="panel-heading">
+						Rota types
+						<span style = 'float:right;'>
+							<?php
+							echo button(
+								$id      = 'modal_AddRota-show', 
+								$text    = 'Add rota', 
+								$class   = 'danger', 
+								$onclick = 'showModal(this.id)',
+								$icon    = iconDespatch('add')
+							);
+							?>
+						</span>
+					</div>
 					
 					<?php
 						echo sqltbl_to_html($RotaDBInterface->get_all_rotas());
 					?>
-					<label for="newRotaName">Rota name</label>
-					<input id='newRotaName' type = 'text' /> <br/>
-					<label for="newRotaGroupName">Rota group name</label>
-					<input id='newRotaGroupName' type = 'text' />
-					<br />
-					<button class="btn btn-primary update" id='addRotaName' onClick='addRotaName(this.id);'>Add rota</button>
+
 					
+					
+					<?php
+					echo modal(
+						$id     = 'modal_AddRota',
+						$header = 'Add rota',
+						$body   = "	<label for='newRotaName'>Rota name</label>
+						<input id='newRotaName' type = 'text' /> <br/>
+						<label for='newRotaGroupName'>Rota group name</label>
+						<input id='newRotaGroupName' type = 'text' />
+						<br />
+						<button class='btn btn-primary update' id='addRotaName' onClick='addRotaName(this.id);'>Add rota</button>
+						",
+						$footer = ''
+					);
+					?>
+
 				</div>
 			</div>
 

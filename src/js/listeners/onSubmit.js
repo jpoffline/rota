@@ -2,6 +2,8 @@ function onSubmitListen(type, id) {
     alert(type + id);
 }
 
+
+
 function onSubmitSaveRotaOptions(id)
 {
     var items = id.split('-');

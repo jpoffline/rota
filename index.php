@@ -22,17 +22,17 @@ include_once('src/php/html_head.php');
 		</h1>
     <?php
       echo button(
-        $id      = 'myModal-show', 
+        $id      = 'modal_MySkills-show', 
         $text    = 'View and edit my skills', 
         $class   = 'danger', 
-        $onclick = '',
+        $onclick = 'showModal(this.id)',
         $icon    = iconDespatch('skills')
       );
     ?>
     
     <?php
       echo modal(
-        $id     = 'myModal',
+        $id     = 'modal_MySkills',
         $header = 'My '.$CLS_rota_member->get_rota_type().' skills',
         $body   = $CLS_rota_member->render_skills(),
         $footer = ''

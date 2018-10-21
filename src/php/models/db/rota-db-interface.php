@@ -15,7 +15,6 @@ class RotaDBInterface
 	private $user      = 'root';
 	private $password = 'root';
 	private $db       = 'rota';
-	private $host     = 'localhost';
 	private $port     = 8889;
 	private $sqlconn;
 	private $has_error = false;

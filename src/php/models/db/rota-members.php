@@ -7,8 +7,10 @@ class RotaDB_memberstbl{
 	}
 
 	function get_all(){
-		$sql = "SELECT * FROM members
+		$sql = "SELECT members.userid, members.username, CONCAT(members.firstname, ' ', members.lastname) as name, rotas.rotaname FROM members
 		INNER join rotamembership on rotamembership.userid = members.userid
+		INNER JOIN rotas on rotas.rotaid = rotamembership.rotaid
+		order by members.userid asc
 		";
 		return $this->conn->query($sql);
 	}

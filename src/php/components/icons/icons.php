@@ -24,6 +24,10 @@ function iconDespatch($name)
 	{
 		return 'binoculars';
 	}
+	if($name == 'add')
+	{
+		return 'plus';
+	}
 }
 
 ?>
