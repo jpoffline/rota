@@ -31,7 +31,7 @@ include_once('src/php/html_head.php');
 							<?php
 							echo button(
 								$id      = 'modal_AddRota-show', 
-								$text    = 'Add rota', 
+								$text    = '', 
 								$class   = 'danger', 
 								$onclick = 'showModal(this.id)',
 								$icon    = iconDespatch('add')
@@ -50,13 +50,20 @@ include_once('src/php/html_head.php');
 					echo modal(
 						$id     = 'modal_AddRota',
 						$header = 'Add rota',
-						$body   = "	<label for='newRotaName'>Rota name</label>
-						<input id='newRotaName' type = 'text' /> <br/>
-						<label for='newRotaGroupName'>Rota group name</label>
-						<input id='newRotaGroupName' type = 'text' />
+						$body   = "<table><tr>
+						<td><label for='newRotaName'>Rota name</label></td>
+						<td><input id='newRotaName' type = 'text' /> </td></tr>
+						<td><label for='newRotaGroupName'>Rota group name</label></td>
+						<td><input id='newRotaGroupName' type = 'text' /></td></tr>
+						</table>
 						<br />
-						<button class='btn btn-primary update' id='addRotaName' onClick='addRotaName(this.id);'>Add rota</button>
-						",
+						".button(
+							$id = 'addRotaName',
+							$text = 'Add rota',
+							$class = 'primary update',
+							$onclick = 'addRotaName(this.id)'
+						)
+						,
 						$footer = ''
 					);
 					?>
