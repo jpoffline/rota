@@ -138,7 +138,7 @@ function RotaSQL_setuptbls()
 	}
 	
 	$sql = "CREATE TABLE IF NOT EXISTS memberskills (
-		userid INT unsigned NOT NULL,
+		userid  INT unsigned NOT NULL,
 		skillid INT unsigned NOT NULL
 	)";
 	if ($conn->query($sql) === TRUE) {
@@ -149,8 +149,8 @@ function RotaSQL_setuptbls()
 	}
 	
 	$sql = "CREATE TABLE IF NOT EXISTS skillstypes (
-		skillid INT unsigned AUTO_INCREMENT PRIMARY KEY,
-		rotaid INT UNSIGNED NOT NULL,
+		skillid   INT unsigned AUTO_INCREMENT PRIMARY KEY,
+		rotaid    INT UNSIGNED NOT NULL,
 		skillname VARCHAR(30) NOT NULL,
 		skillicon VARCHAR(30)
 	)";
@@ -162,11 +162,12 @@ function RotaSQL_setuptbls()
 	}
 	
 	$sql = "CREATE TABLE IF NOT EXISTS rotaavailability (
-		rotaid INT UNSIGNED NOT NULL,
-		userid INT UNSIGNED NOT NULL,
-		dateid INT UNSIGNED NOT NULL,
-		periodid INT UNSIGNED NOT NULL,
-		availtypeid INT UNSIGNED NOT NULL
+		rotaid      INT UNSIGNED NOT NULL,
+		userid      INT UNSIGNED NOT NULL,
+		dateid      INT UNSIGNED NOT NULL,
+		periodid    INT UNSIGNED NOT NULL,
+		availtypeid INT UNSIGNED NOT NULL,
+		datechange  TIMESTAMP
 	)";
 	if ($conn->query($sql) === TRUE) {
 		//e		cho "Table rotaavailability created successfully";
@@ -177,7 +178,7 @@ function RotaSQL_setuptbls()
 
 	$sql = "CREATE TABLE IF NOT EXISTS availabilitytypes (
 		availtypeid INT unsigned AUTO_INCREMENT PRIMARY KEY,
-		availtype VARCHAR(30) NOT NULL
+		availtype   VARCHAR(30) NOT NULL
 	)";
 	if ($conn->query($sql) === TRUE) {
 		//e		cho "Table rotamembership created memberskills";
