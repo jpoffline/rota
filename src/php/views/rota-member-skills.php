@@ -1,5 +1,14 @@
 <?php
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: rota-member-skills.php
+CREATED:  2018/10/21
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 class RotaMemberSkillsView
 {
 	private $skills;

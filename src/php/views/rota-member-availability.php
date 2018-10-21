@@ -1,5 +1,14 @@
 <?php
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: rota-member-availability.php
+CREATED:  2018/10/21
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 class RotaMemberAvailabilityView
 {
 	private $colnames = array('Date', 'Available','Confirmed');

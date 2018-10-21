@@ -1,5 +1,14 @@
 <?php
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: rota-db-interface.php
+CREATED:  2018/10/21
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 class RotaDBInterface
 {
 	private $servername = "localhost";
@@ -78,7 +87,7 @@ class RotaDBInterface
 	}
 
 	function set_user_skills($opts, $newState = 1){
-		
+
 		$this->_set_update_db_data(
 			'memberskills', 
 			$opts, 
@@ -120,23 +129,19 @@ class RotaDBInterface
 	private function _set_update_db_data($tableName, $opts, $newState)
 	{
 
+		$this->sqlconn->query(
+			$this->_get_update_db_data_qy(
+				$tableName, 
+				$newState, 
+				namesGenerateDespatch($tableName), 
+				deparseDespatch($tableName, $opts, $format = stateToFormat($newState))
+			)
+		);
 		
-		if($newState == 0)
-		{
-			$fmt = "sep-and";
-		}
-		else if($newState == 1)
-		{
-			$fmt = "csv";
-		}
-		else
-		{
-			writeToLog('INVALID newState: '. $newState);
-		}
+	}
 
-		$opts = deparseDespatch($tableName, $opts, $format = $fmt);
-		$nams = namesGenerateDespatch($tableName);
-
+	private function _get_update_db_data_qy($tableName, $newState, $names, $opts)
+	{
 		if($newState == 1)
 		{
 			$qy = "INSERT INTO ".$tableName." (".$names.") VALUES (".$opts.")";
@@ -149,12 +154,27 @@ class RotaDBInterface
 		{
 			writeToLog('INVALID newState: '. $newState);
 		}
-
 		writeToLog($qy);
-
-		$this->sqlconn->query($qy);
-		
+		return $qy;
 	}
+
+}
+
+function stateToFormat($newState)
+{
+	if($newState == 0)
+	{
+		$fmt = "sep-and";
+	}
+	else if($newState == 1)
+	{
+		$fmt = "csv";
+	}
+	else
+	{
+		writeToLog('INVALID newState: '. $newState);
+	}
+	return $fmt;
 }
 
 function deparseDespatch($type, $opts, $format)

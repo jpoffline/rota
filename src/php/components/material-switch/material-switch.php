@@ -1,5 +1,13 @@
 <?php
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: material-switch.php
+CREATED:  2018/10/21
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 # see https://bootsnipp.com/snippets/featured/material-design-switch
 
