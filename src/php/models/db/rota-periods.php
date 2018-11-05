@@ -7,7 +7,12 @@ class RotaDB_periodstbl{
 	}
 
 	function get_all(){
-		$sql = "SELECT periods.periodid, periods.periodname, rotas.rotaname FROM periods
+		$sql = "
+		SELECT 
+			periods.periodid, 
+			periods.periodname, 
+			rotas.rotaname 
+		FROM periods
 		INNER join rotas on rotas.rotaid = periods.rotaid
 			";
 		return $this->conn->query($sql);

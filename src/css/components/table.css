@@ -1,3 +1,10 @@
 .table{
 	font-size: 80%;
 }
+
+.tbl-mod{
+	padding: 5px;
+	color: white;
+	border: 3px dotted white;
+	border-radius: 5px;
+}

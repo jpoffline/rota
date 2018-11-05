@@ -50,7 +50,11 @@ class Table
 
 }
 
-function sqltbl_to_html($data){
+function rgbcode($id){
+    return '#'.substr(md5($id), 0, 6);
+}
+
+function sqltbl_to_html($data, $columformat = null){
 	$tb = '';
 	$tb.= '<table class="table">';
 
@@ -70,9 +74,20 @@ function sqltbl_to_html($data){
 		
 		$tb.= '<tr>';
 		$row = '';
-		foreach($rr as $rrr){
+		
+		foreach($rr as $k =>$rrr)
+		{
+			if(array_key_exists($k, $columformat) )
+			{
+				if($columformat[$k] == "str")
+				{
+					$rgb = rgbcode($rrr);
+				}
+				$rrr ='<span class="tbl-mod" style="background-color:'.$rgb.';">'.$rrr.'</span>';
+			}
 			$row .= '<td>'.$rrr.'</td>';
 		}
+
 		$tb.= $row.'</tr>';
 	}
 	$tb.= '</tbody>';
