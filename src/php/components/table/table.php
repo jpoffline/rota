@@ -50,8 +50,11 @@ class Table
 
 }
 
-function rgbcode($id){
-    return '#'.substr(md5($id), 0, 6);
+function rgbcode($id, $opacity = 0.5){
+	$hex = '#'.substr(md5($id), 0, 6);
+	
+	list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+	return 'rgb('.$r. ','.$g.','.$b.', '.$opacity.')';
 }
 
 function sqltbl_to_html($data, $columformat = null){
@@ -81,7 +84,7 @@ function sqltbl_to_html($data, $columformat = null){
 			{
 				if($columformat[$k] == "str")
 				{
-					$rgb = rgbcode($rrr);
+					$rgb = rgbcode($rrr, $opacity = 0.2);
 				}
 				$rrr ='<span class="tbl-mod" style="background-color:'.$rgb.';">'.$rrr.'</span>';
 			}
