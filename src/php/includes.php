@@ -41,11 +41,19 @@ include_once('src/php/views/rota-rotas.php');
 RotaSQL_setupdb();
 
 $RESET = false;
-if($RESET)
+$SETUP = false;
+
+if($SETUP)
 {
 	RotaSQL_setuptbls();
+}
+
+if($RESET)
+{
 	RotaSQL_setDummyInfo();
 }
+
+
 
 
 
