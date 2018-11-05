@@ -5,10 +5,10 @@ function showModal(id)
     var modal = document.getElementById(modalid);
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("modal-close")[0];
+    var span = document.getElementById("modal-close-" + modalid);
 
     // When the user clicks the button, open the modal 
-    
+    console.log(modalid);
     modal.style.display = "block";
     
     // When the user clicks on <span> (x), close the modal

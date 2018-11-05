@@ -5,7 +5,7 @@ function modal($id, $header, $body, $footer)
 	<div id="'.$id.'" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-			<span class="modal-close">
+			<span class="modal-close" id="modal-close-'.$id.'">
 				&times;
 			</span>
 			<h2>

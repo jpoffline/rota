@@ -67,6 +67,19 @@ else if($route == "updateMemberSkill")
 		$newState
 	);
 }
+else if($route == "newPeriodForRota")
+{
+	$newPeriodName = $data->{"data"}->{"newPeriodName"};
+	$rotaId = $data->{"data"}->{"rotaId"};
+	writeToLog('adding period for rota');
+	writeToLog('new period name: '.$newPeriodName);
+	writeToLog('rotaID: '.$rotaId);
+	$r1 = new RotaDBInterface();
+	$r1->add_period_for_rotaid(
+		$rotaId,
+		$newPeriodName
+	);
+}
 else
 {
 	writeToLog('unknown route requested');

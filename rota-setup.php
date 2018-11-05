@@ -13,10 +13,57 @@ include_once('src/php/html_head.php');
 			
 			<div class="col-md-6">
 				<div class="panel panel-default">
-					<div class="panel-heading">Periods</div>
+					<div class="panel-heading">
+					Periods
+					<span style = 'float:right;'>
+							<?php
+							echo button(
+								$id      = 'modal_AddPeriod-show', 
+								$text    = '', 
+								$class   = 'danger', 
+								$onclick = 'showModal(this.id)',
+								$icon    = iconDespatch('add')
+							);
+							?>
+						</span>
+					</div>
 					
 					<?php
 						echo sqltbl_to_html($RotaDBInterface->get_periods());
+					?>
+
+					<?php
+					
+					echo modal(
+						$id     = 'modal_AddPeriod',
+						$header = 'Add period',
+						$body   = "<table>
+						<tr>
+							<td><label for='newRotaGroupName'>Rota</label></td>
+							<td>
+								". dropdown(
+									$RotaDBInterface->get_all_rotas(), 
+									'rotaid',
+									'rotaname',
+									'addperiod_rotaid'
+								  )."
+							</td>
+						</tr>
+						<tr>
+							<td><label for='newPeriodName'>New period name</label></td>
+							<td><input id='newPeriodName' type = 'text' /> </td>
+						</tr>
+						</table>
+						<br />
+						".button(
+							$id      = 'addNewPeriod',
+							$text    = 'Add period',
+							$class   = 'primary update',
+							$onclick = 'addPeriodToRota(this.id)'
+						)
+						,
+						$footer = ''
+					);
 					?>
 					
 				</div>
@@ -50,17 +97,21 @@ include_once('src/php/html_head.php');
 					echo modal(
 						$id     = 'modal_AddRota',
 						$header = 'Add rota',
-						$body   = "<table><tr>
-						<td><label for='newRotaName'>Rota name</label></td>
-						<td><input id='newRotaName' type = 'text' /> </td></tr>
-						<td><label for='newRotaGroupName'>Rota group name</label></td>
-						<td><input id='newRotaGroupName' type = 'text' /></td></tr>
+						$body   = "<table>
+						<tr>
+							<td><label for='newRotaName'>Rota name</label></td>
+							<td><input id='newRotaName' type = 'text' /> </td>
+						</tr>
+						<tr>
+							<td><label for='newRotaGroupName'>Rota group name</label></td>
+							<td><input id='newRotaGroupName' type = 'text' /></td>
+						</tr>
 						</table>
 						<br />
 						".button(
-							$id = 'addRotaName',
-							$text = 'Add rota',
-							$class = 'primary update',
+							$id      = 'addRotaName',
+							$text    = 'Add rota',
+							$class   = 'primary update',
 							$onclick = 'addRotaName(this.id)'
 						)
 						,

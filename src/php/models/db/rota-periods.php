@@ -7,7 +7,8 @@ class RotaDB_periodstbl{
 	}
 
 	function get_all(){
-		$sql = "SELECT * FROM periods 
+		$sql = "SELECT periods.periodid, periods.periodname, rotas.rotaname FROM periods
+		INNER join rotas on rotas.rotaid = periods.rotaid
 			";
 		return $this->conn->query($sql);
 	}
@@ -22,6 +23,7 @@ class RotaDB_periodstbl{
 	function add_period_for_rotaid($rotaid, $periodname){
 		$sql = "INSERT INTO periods (rotaid, periodname) 
 		VALUES (".$rotaid.",'".$periodname."')";
+		return $this->conn->query($sql);
 	}
 
 }

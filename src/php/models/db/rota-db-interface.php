@@ -95,6 +95,10 @@ class RotaDBInterface
 		
 	}
 
+	function add_period_for_rotaid($rotaid,$periodname){
+		$this->RotaDB_periodstbl->add_period_for_rotaid($rotaid, $periodname);
+	}
+
 	function get_periods(){
 		return $this->RotaDB_periodstbl->get_all();
 	}
