@@ -50,12 +50,7 @@ class Table
 
 }
 
-function rgbcode($id, $opacity = 0.5){
-	$hex = '#'.substr(md5($id), 0, 6);
-	
-	list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
-	return 'rgb('.$r. ','.$g.','.$b.', '.$opacity.')';
-}
+
 
 function sqltbl_to_html($data, $columformat = null){
 	$tb = '';
@@ -84,9 +79,10 @@ function sqltbl_to_html($data, $columformat = null){
 			{
 				if($columformat[$k] == "str")
 				{
-					$rgb = rgbcode($rrr, $opacity = 0.2);
+					$rgb = str_to_rgb($rrr, $opacity = 0.2);
+					$rrr = badge($rrr, $rgb, 'tbl-mod');
 				}
-				$rrr ='<span class="tbl-mod" style="background-color:'.$rgb.';">'.$rrr.'</span>';
+
 			}
 			$row .= '<td>'.$rrr.'</td>';
 		}

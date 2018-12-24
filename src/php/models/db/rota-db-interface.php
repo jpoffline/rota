@@ -11,11 +11,11 @@ AUTHOR:   JPEARSON
 
 class RotaDBInterface
 {
-	private $servername = "localhost";
-	private $user      = 'root';
-	private $password = 'root';
-	private $db       = 'rota';
-	private $port     = 8889;
+	private $servername;
+	private $user;
+	private $password;
+	private $db;
+	private $port;
 	private $sqlconn;
 	private $has_error = false;
 
@@ -26,6 +26,18 @@ class RotaDBInterface
 	
 	function __construct($org = 'shbc'){
 
+
+		$SQLCONFIG = array(
+			"servername" => 'localhost',
+			"username"   => 'root',
+			"password"   => 'root',
+			"database"   => 'rota',
+			"port"       => 8889
+		);
+
+
+		$this->set_sql_config($SQLCONFIG);
+
 		$this->_create_db();
 		$this->_connect_to_rota_sql();
 
@@ -34,6 +46,31 @@ class RotaDBInterface
 		$this->RotaDB_availabilitytypestbl = new RotaDB_availabilitytypestbl($this->sqlconn);
 		$this->RotaDB_memberstbl           = new RotaDB_memberstbl($this->sqlconn);
 	}
+
+	function set_sql_config($sqlconfig){
+		$this->set_sql_server(  $sqlconfig['servername']);
+		$this->set_sql_user(    $sqlconfig['username']);
+		$this->set_sql_password($sqlconfig['password']);
+		$this->set_sql_db(      $sqlconfig['database']);
+		$this->set_sql_port(    $sqlconfig['port']);
+	}
+
+	function set_sql_server($sv){
+		$this->servername = $sv;
+	}
+	function set_sql_user($usr){
+		$this->user = $usr;
+	}
+	function set_sql_password($pwd){
+		$this->password = $pwd;
+	}
+	function set_sql_db($db){
+		$this->db = $db;
+	}
+	function set_sql_port($prt){
+		$this->port = $prt;
+	}
+	
 
 	function add_member(
 		$new_username, 
@@ -114,6 +151,10 @@ class RotaDBInterface
 			$this->password, 
 			$this->db
 		);
+	}
+
+	function get_sqlconn(){
+		return $this->sqlconn;
 	}
 
 	private function _create_db()

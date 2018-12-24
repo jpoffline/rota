@@ -1,10 +1,13 @@
 <?php
+
 include_once('version.php');
 include_once('src/php/lib/json.php');
+include_once('src/php/lib/utils/str_to_rgb.php');
 include_once('src/php/lib/sql/factories.php');
 
 include_once('src/php/components/modal/modal.php');
 include_once('src/php/components/buttons/button.php');
+include_once('src/php/components/badge/badge.php');
 include_once('src/php/components/material-switch/material-switch.php');
 include_once('src/php/components/table/table.php');
 include_once('src/php/components/icons/icons.php');
@@ -18,6 +21,8 @@ include_once('src/php/models/db/rota-periods.php');
 include_once('src/php/models/db/rota-members.php');
 include_once('src/php/models/db/rota-availiabilitytypes.php');
 
+include_once('src/php/ui/forms/add-rota.php');
+include_once('src/php/ui/forms/add-period.php');
 
 include_once('src/php/models/rota/rota.php');
 include_once('src/php/models/rota/data-rota-setup.php');
@@ -36,9 +41,6 @@ include_once('src/php/views/rota-member-availability.php');
 include_once('src/php/views/rota-member-skills.php');
 include_once('src/php/views/rota-allmembers.php');
 include_once('src/php/views/rota-rotas.php');
-
-
-RotaSQL_setupdb();
 
 $RESET = false;
 $SETUP = false;

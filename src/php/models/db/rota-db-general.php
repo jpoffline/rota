@@ -2,35 +2,11 @@
 
 function GetRotaSQLconn()
 {
-	$servername = "localhost";
-	$user      = 'root';
-	$password = 'root';
-	$db       = 'rota';
-	$host     = 'localhost';
-	$port     = 8889;
-	
-	return new mysqli($servername, $user, $password, $db);
+	$cls = new RotaDBInterface();
+	return $cls->get_sqlconn();
 }
 
-function RotaSQL_setupdb(){
-	
-	$servername = "localhost";
-	$user      = 'root';
-	$password = 'root';
-	$db       = 'rota';
-	$host     = 'localhost';
-	$port     = 8889;
-	
-	$conn = new mysqli($servername, $user, $password);
-	// 	Create database
-			$sql = "CREATE DATABASE IF NOT EXISTS ". $db;
-	if ($conn->query($sql) === TRUE) {
-		//e		cho "Database created successfully";
-	}
-	else {
-		//e		cho "Error creating database: " . $conn->error;
-	}
-}
+
 
 function SQL_deltbl($conn, $tbl){
 	$sql = "IF OBJECT_ID('dbo.".$tbl."', 'U') IS NOT NULL DROP TABLE ".$tbl .";";
