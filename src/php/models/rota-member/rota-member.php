@@ -12,7 +12,7 @@ class RotaMember extends Rota
 		$this->userid    = $userid;
 		$this->rota_type = get_rotaname_for_rota($rotaid);
 		$this->rotaid    = $rotaid;
-		
+		$this->set_rotaidx($rotaid);
 		
 		$this->load_memberdata();
 	}

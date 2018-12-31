@@ -269,10 +269,10 @@ function get_skillids_for_rotaname_userid($rotaid, $userid){
 	return $new_array;
 }
 
-function get_periodname_for_type($type, $periodidx){
+function get_periodname_for_type($rotaid, $periodidx){
 	$sql = "SELECT periodname FROM periods 
 		inner join rotas ON rotas.rotaid = periods.rotaid 
-		WHERE rotas.rotaid = ".$type." AND periodid = ".$periodidx;
+		WHERE rotas.rotaid = ".$rotaid." AND periodid = ".$periodidx;
 	$conn = GetRotaSQLconn();
 	
 	$v =  $conn->query($sql);

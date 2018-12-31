@@ -9,10 +9,9 @@ class RotaDataSetup
 
 	}
 
-	function get_periodname_for_type($type, $periodidx = 1)
+	function get_periodname_for_type($rotaid, $periodidx = 1)
 	{
-
-		return get_periodname_for_type($type, $periodidx);
+		return get_periodname_for_type($rotaid, $periodidx);
 	}
 
 	function get_dates_for_type_and_periodid($rotaid, $periodidx = 1)
