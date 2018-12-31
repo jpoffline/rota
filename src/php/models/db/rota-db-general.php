@@ -238,7 +238,7 @@ function get_availability_for_userid($userid, $rotaname, $periodid, $availtypeid
 	INNER JOIN rotas ON rotas.rotaid = rotaavailability.rotaid
 	INNER JOIN dateperiods ON rotaavailability.dateid = dateperiods.dateid
 	WHERE userid = ".$userid." 
-	AND rotaname = '".$rotaname."' 
+	AND rotas.rotaid = ".$rotaname." 
 	AND rotaavailability.periodid = ".$periodid. "
 	AND availtypeid = ".$availtypeid."";
 	
@@ -284,8 +284,8 @@ function get_periodname_for_type($type, $periodidx){
 	}
 }
 
-function get_groupname_for_rota($rotaname){
-	$sql = "select groupname from rotas where rotaid=".$rotaname.";";
+function get_groupname_for_rota($rotaid){
+	$sql = "select groupname from rotas where rotaid=".$rotaid.";";
 	$conn = GetRotaSQLconn();
 	
 	$v =  $conn->query($sql);
@@ -294,6 +294,18 @@ function get_groupname_for_rota($rotaname){
 		return $row['groupname'];
 		$new_array[] = $row;
 		// 		Inside while loop
+	}
+}
+
+function get_rotaname_for_rota($rotaid){
+	$sql = "select rotaname from rotas where rotaid=".$rotaid.";";
+	$conn = GetRotaSQLconn();
+	
+	$v =  $conn->query($sql);
+	$new_array = [];
+	while( $row = $v->fetch_assoc()){
+		return $row['rotaname'];
+		$new_array[] = $row;
 	}
 }
 

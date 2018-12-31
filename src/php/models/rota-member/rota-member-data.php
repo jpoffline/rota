@@ -49,9 +49,9 @@ class RotaMemberData extends RotaMembers
 		return $this->get_datestate($this->userid, $rota_type, $periodid, 2);
 	}
 
-	function get_datestate($rota_type, $periodid, $availtypeid)
+	function get_datestate($rotaid, $periodid, $availtypeid)
 	{
-		return get_availability_for_userid($this->userid, $rota_type, $periodid, $availtypeid);
+		return get_availability_for_userid($this->userid, $rotaid, $periodid, $availtypeid);
 	}
 
 	

@@ -12,11 +12,17 @@ AUTHOR:   JPEARSON
 include_once('src/php/lib/log/logger.php');
 include_once('src/php/includes.php');
 header("Content-Type: application/json");
+
+// Pull the data from the HTTP request header
 $data = json_decode($_REQUEST["data"]);
 
+// Pull out the route name
 $route = $data->{"route"};
+
+// Write the route to log
 writeToLog('ROUTE '.$route);
 
+// Decide what to do, based on the route.
 if($route == "newRota")
 {
 	$db = new RotaDBInterface();
@@ -29,9 +35,53 @@ else if($route == "showCompiledRota")
 {
 	$cls = new RotaMembersAllView(
 		$data->{"data"}->{"rotaid"}, 
-		$data->{"data"}->{"periodid"});
+		$data->{"data"}->{"periodid"}
+	);
     echo $cls->render();
 } 
+else if($route == "showUserAvailabilityOptions")
+{
+	writeToLog('viewing user availablity options');
+
+	$uid = $data->{"data"}->{"userid"};
+	$pid = $data->{"data"}->{"periodid"};
+	$rid = $data->{"data"}->{"rotaid"};
+	writeToLog('userid:   '. $uid);
+	writeToLog('periodid: '. $pid);
+	writeToLog('rotaid:   '. $rid);
+	$rm = new RotaMember(
+		$uid, 
+		$pid, 
+		$rid
+	);
+	$btn = button(
+        $id      = 'modal_MySkills-show', 
+        $text    = 'View and edit my skills', 
+        $class   = 'danger', 
+        $onclick = 'showModal(this.id)',
+        $icon    = iconDespatch('skills')
+      );
+    
+      $mdl = modal(
+        $id     = 'modal_MySkills',
+        $header = 'My '.$rm->get_rota_type().' skills',
+        $body   = $rm->render_skills(),
+        $footer = ''
+      );
+    
+	$ar = array(
+		'username'             => $rm->get_usernamefull(),
+		'rotatype'             => $rm->get_rota_type(),
+		'periodname'           => $rm->get_period_name($pid),
+		'numavailabledays'     => $rm->num_days_available(),
+		'useravailabilityopts' => $rm->render_availability(),
+		'btnuserskills'        => $btn,
+		'mdluserskills'        => $mdl
+
+	);
+	writeToLog('periodname: '.$rm->get_period_name($pid));
+	echo json_encode($ar);
+}
 else if($route == "getPeriodsForRotaid")
 {
 	$r1 = new RotaDBInterface();

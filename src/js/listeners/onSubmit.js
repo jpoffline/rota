@@ -89,4 +89,22 @@ function showUserAvailabilityOptions()
     var periodid = getDropdownValue('selection_periods');
     console.log(rotaid);
     console.log(periodid);
+    sendToBackend(
+        'showUserAvailabilityOptions',
+        {
+            'userid': 1,
+            'rotaid':rotaid,
+            'periodid':periodid
+        },
+        [
+            'username' ,
+            'rotatype',
+            'periodname',
+            'numavailabledays',
+            'useravailabilityopts',
+            'btnuserskills',
+            'mdluserskills'
+        ],
+        'multi'
+    );
 }

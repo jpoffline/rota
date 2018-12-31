@@ -4,26 +4,29 @@
 class RotaMember extends Rota
 {
 
-	function __construct($userid, $periodid, $rotatype, $rotaid)
+	function __construct($userid, $periodid, $rotaid)
 	{
 		parent::__construct();
-		
-		$this->userid    = $userid;
-		$this->rota_type = $rotatype;
-		$this->rotaid    = $rotaid;
 		$this->periodid  = $periodid;
+		$this->set_periodidx((int)$periodid);
+		$this->userid    = $userid;
+		$this->rota_type = get_rotaname_for_rota($rotaid);
+		$this->rotaid    = $rotaid;
+		
+		
 		$this->load_memberdata();
 	}
 
 	private function load_memberdata()
 	{
+		
 		$this->mbd          = new RotaMemberData($this->userid);
 		$this->userid       = $this->mbd->userid();
 		$this->username     = $this->mbd->username();
 		$this->usernamefull = $this->mbd->usernamefull();
 		$this->skills       = $this->mbd->skills($this->rotaid);
-		$this->availability = $this->mbd->get_datestate($this->rota_type, $this->periodid, 1);
-		$this->confirmed    = $this->mbd->get_datestate($this->rota_type, $this->periodid, 2);
+		$this->availability = $this->mbd->get_datestate($this->rotaid, $this->periodid, 1);
+		$this->confirmed    = $this->mbd->get_datestate($this->rotaid, $this->periodid, 2);
 	}
 
 	function num_days_available()
@@ -49,7 +52,7 @@ class RotaMember extends Rota
 	function get_datedate($availtypeid)
 	{
 		return $this->mbd->get_datestate(
-			$this->rota_type, 
+			$this->rotaid, 
 			$this->periodid, 
 			$availtypeid
 		);
