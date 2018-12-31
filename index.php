@@ -1,18 +1,42 @@
 <?php
 include_once('src/php/includes.php');
+$RotaDBInterface = new RotaDBInterface();
 ?>
 
 
 <?php
 include_once('src/php/html_head.php');
+
 ?>
 
 	<div class='container'>
 
     <?php
-      $userid = 1;
-      $periodid = 1;
-      $CLS_rota_member = new RotaMember($userid, $periodid, 'music');
+
+      echo dropdown(
+        $RotaDBInterface->get_all_rotas(), 
+        'rotaid',
+        'rotaname',
+        'selection_rotas',
+        'onChange_rotaid'
+      );
+    ?>
+    <div id = 'dd_periods_for_rota' ></div>
+
+    <?php
+          echo button(
+            $id      = 'btn_showUserAvailability',
+            $text    = 'Show',
+            $class   = 'danger',
+            $onclick = 'showUserAvailabilityOptions()',
+            $icon    = iconDespatch('view')
+          );
+
+
+          $userid   = 1;
+          $periodid = 1;
+          $rotaid   = 1;
+          $CLS_rota_member = new RotaMember($userid, $periodid, 'music', $rotaid);
     ?>
 
 		<h1>
@@ -21,6 +45,7 @@ include_once('src/php/html_head.php');
 			Rota: <?php echo $CLS_rota_member->get_rota_type()?>
 		</h1>
     <?php
+    
       echo button(
         $id      = 'modal_MySkills-show', 
         $text    = 'View and edit my skills', 
@@ -54,7 +79,6 @@ include_once('src/php/html_head.php');
          
             <?php
               echo $CLS_rota_member->render_availability();
-
             ?>
             
         </div>

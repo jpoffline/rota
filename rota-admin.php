@@ -1,19 +1,15 @@
 <?php
-
 include_once('src/php/includes.php');
+$RotaDBInterface = new RotaDBInterface();
 
-?>
-
-<?php
 include_once('src/php/html_head.php');
 ?>
       
 
     <div class='container'>
-    <?php
-        $r1 = new RotaDBInterface();
+      <?php
         echo dropdown(
-          $r1->get_all_rotas(), 
+          $RotaDBInterface->get_all_rotas(), 
           'rotaid',
           'rotaname',
           'selection_rotas',
@@ -21,19 +17,19 @@ include_once('src/php/html_head.php');
         );
         
       ?>
-        <div id = 'dd_periods_for_rota' ></div>
-        
-        <?php
-          echo button(
-            $id      = 'showRotaCompiled', 
-            $text    = 'Show', 
-            $class   = 'primary', 
-            $onclick = 'showRotaCompiled()',
-            $icon = iconDespatch('view')
-          );
-        ?>
+      <div id = 'dd_periods_for_rota' ></div>
+      
+      <?php
+        echo button(
+          $id      = 'showRotaCompiled', 
+          $text    = 'Show', 
+          $class   = 'primary', 
+          $onclick = 'showRotaCompiled()',
+          $icon = iconDespatch('view')
+        );
+      ?>
 
-        <div id = 'area_compiledRotaView'></div>
+      <div id = 'area_compiledRotaView'></div>
 
     </div>
 

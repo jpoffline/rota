@@ -1,4 +1,7 @@
 <?php
+
+
+
 function modal($id, $header, $body, $footer)
 {
 	return '
@@ -20,6 +23,30 @@ function modal($id, $header, $body, $footer)
         </div>
       </div>
     </div>';
+}
+
+function modal_button(
+	$id, 
+	$button_text, 
+	$button_class,
+	$button_icon,
+	$modal_title,
+	$modal_body,
+	$modal_footer
+){
+      return button(
+        $id      = 'modal_'.$id.'-show', 
+        $text    = $button_text, 
+        $class   = $button_class, 
+        $onclick = 'showModal(this.id)',
+        $icon    = iconDespatch($button_icon)
+      ) . modal(
+        $id     = 'modal_'.$id,
+        $header = $modal_title,
+        $body   = $modal_body,
+        $footer = $modal_footer
+      );
+    
 }
 
 ?>

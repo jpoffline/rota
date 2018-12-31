@@ -1,4 +1,5 @@
 <?php
+$organisation = 'SHBC';
 
 echo '
 
@@ -20,10 +21,10 @@ echo '
     <link rel="stylesheet" href="src/css/components/buttons.css">
     <link rel="stylesheet" href="src/css/components/modal.css">
     <link rel="stylesheet" href="src/css/tabset/tabset.css">
-    <title>SHBC::rota</title>
+    <title>'.$organisation.'::rota</title>
   </head>
   <body>
-  SHBC // rota // music // <a href="index.php">home</a> //
+  '.$organisation.' // rota // <a href="index.php">home</a> //
   <a href="rota-admin.php">admin</a> //
   <a href="rota-setup.php">setup</a>
   

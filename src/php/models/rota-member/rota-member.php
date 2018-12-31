@@ -4,14 +4,14 @@
 class RotaMember extends Rota
 {
 
-	function __construct($userid, $periodid, $rotatype)
+	function __construct($userid, $periodid, $rotatype, $rotaid)
 	{
 		parent::__construct();
 		
-		$this->userid = $userid;
+		$this->userid    = $userid;
 		$this->rota_type = $rotatype;
-		$this->rotaid = 1;
-		$this->periodid = $periodid;
+		$this->rotaid    = $rotaid;
+		$this->periodid  = $periodid;
 		$this->load_memberdata();
 	}
 
@@ -48,7 +48,11 @@ class RotaMember extends Rota
 
 	function get_datedate($availtypeid)
 	{
-		return $this->mbd->get_datestate($this->rota_type, $this->periodid, $availtypeid);
+		return $this->mbd->get_datestate(
+			$this->rota_type, 
+			$this->periodid, 
+			$availtypeid
+		);
 	}
 
 	function get_username()
@@ -82,7 +86,8 @@ class RotaMember extends Rota
 	function render_skills()
 	{
 		$view_skills = new RotaMemberSkillsView(
-			$this, $this->rotaid
+			$this, 
+			$this->rotaid
 		);
 		return $view_skills->render();
 	}

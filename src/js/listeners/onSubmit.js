@@ -73,8 +73,6 @@ function showRotaCompiled()
 {
     var rotaid = getDropdownValue('selection_rotas');
     var periodid = getDropdownValue('selection_periods');
-    //document.getElementById('area_compiledRotaView').innerHTML = "<b>HI</b>";
-    //alert(rotaid + periodid);
     sendToBackend(
         'showCompiledRota',
         {
@@ -83,4 +81,12 @@ function showRotaCompiled()
         },
         'area_compiledRotaView'
     );
+}
+
+function showUserAvailabilityOptions()
+{
+    var rotaid   = getDropdownValue('selection_rotas');
+    var periodid = getDropdownValue('selection_periods');
+    console.log(rotaid);
+    console.log(periodid);
 }
