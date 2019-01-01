@@ -11,6 +11,8 @@ AUTHOR:   JPEARSON
 
 include_once('src/php/lib/log/logger.php');
 include_once('src/php/includes.php');
+include_once('src/php/routes/showUserAvailabilityOptions.php');
+
 header("Content-Type: application/json");
 
 // Pull the data from the HTTP request header
@@ -41,46 +43,12 @@ else if($route == "showCompiledRota")
 } 
 else if($route == "showUserAvailabilityOptions")
 {
-	writeToLog('viewing user availablity options');
 
-	$uid = $data->{"data"}->{"userid"};
-	$pid = $data->{"data"}->{"periodid"};
-	$rid = $data->{"data"}->{"rotaid"};
-	writeToLog('userid:   '. $uid);
-	writeToLog('periodid: '. $pid);
-	writeToLog('rotaid:   '. $rid);
-	$rm = new RotaMember(
-		$uid, 
-		$pid, 
-		$rid
+	echo route_showUserAvailabilityOptions(
+		writeToLog,
+		$data->{"data"}
 	);
-	$btn = button(
-        $id      = 'modal_MySkills-show', 
-        $text    = 'View and edit my skills', 
-        $class   = 'danger', 
-        $onclick = 'showModal(this.id)',
-        $icon    = iconDespatch('skills')
-      );
-    
-      $mdl = modal(
-        $id     = 'modal_MySkills',
-        $header = 'My '.$rm->get_rota_type().' skills',
-        $body   = $rm->render_skills(),
-        $footer = ''
-      );
-    
-	$ar = array(
-		'username'             => $rm->get_usernamefull(),
-		'rotatype'             => $rm->get_rota_type(),
-		'periodname'           => $rm->get_period_name($pid),
-		'numavailabledays'     => $rm->num_days_available(),
-		'useravailabilityopts' => $rm->render_availability(),
-		'btnuserskills'        => $btn,
-		'mdluserskills'        => $mdl
 
-	);
-	writeToLog('periodname: '.$rm->get_period_name($pid));
-	echo json_encode($ar);
 }
 else if($route == "getPeriodsForRotaid")
 {
