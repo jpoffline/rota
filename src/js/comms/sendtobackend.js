@@ -1,17 +1,36 @@
-function sendToBackend(route, data, resp = '', mode = 'single') {
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: sendtobackend.js
+CREATED:  2019/01/01
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+function api_filename(){
+    return 'api-recievers-json.php';
+}
+
+function sendToBackend(
+    route, 
+    data, 
+    resp = '', 
+    mode = 'single'
+){
 
     data = {
         "route": route,
         "data": data
     };
+    
+    var url = api_filename() + "?data=" + JSON.stringify(data);
 
     var xhr = new XMLHttpRequest();
-    var url = "api-recievers-json.php?data=" + JSON.stringify(data);
+    
     if(resp != '' & mode == 'single')
     {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
                 document.getElementById(resp).innerHTML =
                     this.responseText;
             }
@@ -22,7 +41,6 @@ function sendToBackend(route, data, resp = '', mode = 'single') {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 php_response = JSON.parse(this.responseText);
-                console.log(php_response);
                 resp.forEach(key => {
                     document.getElementById("ui_" + key).innerHTML =
                     php_response[key];
@@ -32,7 +50,6 @@ function sendToBackend(route, data, resp = '', mode = 'single') {
             }
         };
     }
-    console.log(data);
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();

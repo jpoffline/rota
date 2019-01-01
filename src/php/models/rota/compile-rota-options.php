@@ -132,7 +132,8 @@ class CompileRotaOptions
 		$dates = list_availability_for_user_rota_period(
 			$resource_userid,
 			$this->rotaid,
-			$periodid, $availtype
+			$periodid, 
+			$availtype
 		);
 		$empty = '-';
 		$delim = ' ';
@@ -174,8 +175,8 @@ class CompileRotaOptions
 	private function render_resource($id, $text, $availtype)
 	{
 		$html_tag = 'button';
-		if($availtype == 1){$css_init = 'btn btn-info btn-sm';}
-		else if($availtype == 2){$css_init = 'btn btn-danger btn-sm';}
+		if($availtype == 1){$css_init = 'btn btn-sm btn-info';}
+		else if($availtype == 2){$css_init = 'btn btn-sm btn-danger';}
 		$js_onclick = 'onClickRotaResource(this.id);';
 		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'" onClick="'.$js_onclick.'">'.
 			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text).'</'.$html_tag.'>';	

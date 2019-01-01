@@ -9,8 +9,7 @@ class RotaMembersAllView
 	function __construct(
 		$rotaid,
 		$periodid
-	)
-	{
+	){
 		$this->periodid = $periodid;
 		$this->rotaid   = $rotaid;
 		$this->periodinfo = get_periodname_for_type(
@@ -40,14 +39,16 @@ class RotaMembersAllView
 		$cls = new Table(
 			array(
 			  'colnames' => $dd->get_colnames(),
-			  'rows' => $data,
-			  'id' => 'compiled-'.$this->rotaid.'-'.$this->periodid
+			  'rows'     => $data,
+			  'id'       => 'compiled-'.$this->rotaid.'-'.$this->periodid
 			)
 		);
 		return '<h1>'.$this->groupname.' setup // '.$this->periodinfo.'</h1>'.
-				'<h2>View: availability of skill sets <button class="btn btn-primary" 
-				onClick="onSubmitSaveRotaOptions(this.id)" id="'.$this->rotaid.'-'.$this->periodid.'">save</button></h2>'
-					.$cls->render();
+				'<h2>View: availability of skill sets </h2>
+				'
+					.$cls->render().
+					'<button class="btn btn-primary" 
+					onClick="onSubmitSaveRotaOptions(this.id)" id="'.$this->rotaid.'-'.$this->periodid.'">save</button>';
 	}
 
 }

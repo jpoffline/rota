@@ -1,4 +1,12 @@
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: onChange.js
+CREATED:  2019/01/01
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 onChangeListen = function(WhichModel, WhichId)
 {
@@ -59,7 +67,7 @@ onClickRotaResource = function(id)
 			element.innerHTML = element.innerHTML.replace(icon + ' ','');
 		}*/
 		//element.classList.toggle("fa fa-check");
-		console.log(element);
+		//console.log(element);
 		//console.log(element.getElementById(id+'-icon'));
 		
 		
@@ -91,9 +99,6 @@ getDropdownValue = function(id)
 dropDownChange = function(id)
 {
 	var selection = getSelectedOption(document.getElementById(id));
-	/*alert(
-		selection.value
-	);*/
 }
 
 onChange_rotaid = function(id)
@@ -110,7 +115,8 @@ onChange_rotaid = function(id)
     );
 }
 
-getSelectedOption = function(sel){
+getSelectedOption = function(sel)
+{
 	var opt;
 	for ( var i = 0, len = sel.options.length; i < len; i++ ) {
 		opt = sel.options[i];

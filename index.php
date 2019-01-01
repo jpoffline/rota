@@ -21,7 +21,7 @@ include_once('src/php/html_head.php');
         'onChange_rotaid'
       );
     ?>
-    <div id = 'dd_periods_for_rota' ></div>
+    <span id = 'dd_periods_for_rota' ></span>
 
     <?php
           echo button(

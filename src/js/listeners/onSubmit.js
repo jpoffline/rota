@@ -1,8 +1,16 @@
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+FILENAME: onSubmit.js
+CREATED:  2019/01/01
+AUTHOR:   JPEARSON
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 function onSubmitListen(type, id) {
     alert(type + id);
 }
-
-
 
 function onSubmitSaveRotaOptions(id)
 {
@@ -26,7 +34,6 @@ function onSubmitSaveRotaOptions(id)
                 {
                     for(var i = 0; i < btns.length; i++)
                     {
-                        
                         if(btns[i].classList.contains("active"))
                         {
                             activeCells.push({'id':btns[i].id});
@@ -42,7 +49,7 @@ function onSubmitSaveRotaOptions(id)
 }
 
 function addRotaName(id) {
-    var newName = document.getElementById('newRotaName').value;
+    var newName      = document.getElementById('newRotaName').value;
     var newGroupName = document.getElementById('newRotaGroupName').value;
 
     sendToBackend(
@@ -71,7 +78,7 @@ function addPeriodToRota(id) {
 
 function showRotaCompiled()
 {
-    var rotaid = getDropdownValue('selection_rotas');
+    var rotaid   = getDropdownValue('selection_rotas');
     var periodid = getDropdownValue('selection_periods');
     sendToBackend(
         'showCompiledRota',
@@ -87,8 +94,7 @@ function showUserAvailabilityOptions()
 {
     var rotaid   = getDropdownValue('selection_rotas');
     var periodid = getDropdownValue('selection_periods');
-    console.log(rotaid);
-    console.log(periodid);
+    
     sendToBackend(
         'showUserAvailabilityOptions',
         {
