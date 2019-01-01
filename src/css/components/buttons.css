@@ -15,3 +15,9 @@
 	background-color: orange;
 }
 
+.activeusr{
+	font-weight: bold;
+}
+.activeusr:before {
+    content:"• ";
+}

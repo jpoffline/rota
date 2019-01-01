@@ -36,7 +36,7 @@ include_once('src/php/models/rota-member/availability-string.php');
 
 include_once('src/php/models/skills/skills-data.php');
 include_once('src/php/models/skills/skills-string.php');
-
+include_once('src/php/models/availabilitytypes/availtypes.php');
 include_once('src/php/views/rota-member-availability.php');
 include_once('src/php/views/rota-member-skills.php');
 include_once('src/php/views/rota-allmembers.php');

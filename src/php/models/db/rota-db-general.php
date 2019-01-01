@@ -154,7 +154,9 @@ function RotaSQL_setuptbls()
 
 	$sql = "CREATE TABLE IF NOT EXISTS availabilitytypes (
 		availtypeid INT unsigned AUTO_INCREMENT PRIMARY KEY,
-		availtype   VARCHAR(30) NOT NULL
+		availtype   VARCHAR(30) NOT NULL,
+		btn         VARCHAR(30),
+		icon        VARCHAR(30)
 	)";
 	if ($conn->query($sql) === TRUE) {
 		//e		cho "Table rotamembership created memberskills";
@@ -211,6 +213,19 @@ function list_skills_for_rota($rotaid){
 	where rotas.rotaid = ".$rotaid;
 	$conn = GetRotaSQLconn();
 	return $conn->query($sql);
+}
+
+function get_all_availablity_types()
+{
+	$sql = "SELECT
+	availtypeid as availtypeid,
+	availtype as availtype,
+	btn as btn,
+	icon as icon
+	FROM availabilitytypes";
+	$conn = GetRotaSQLconn();
+	$res = $conn->query($sql);
+	return $res;
 }
 
 function sql_get_one($conn, $sql, $col){

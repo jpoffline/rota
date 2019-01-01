@@ -56,6 +56,7 @@ onClickRotaResource = function(id)
 	if(element.parentElement.parentElement.classList.contains('editable-row'))
 	{
 		element.classList.toggle("active");
+		element.classList.toggle("activeusr");
 		/*
 		icon = to_icon('check');
 		if(element.classList.contains("active"))
@@ -71,15 +72,6 @@ onClickRotaResource = function(id)
 		//console.log(element.getElementById(id+'-icon'));
 		
 		
-		
-		if(element.classList.contains("btn-info"))
-		{
-			element.classList.replace("btn-info", "btn-sucess");
-		}
-		else if(element.classList.contains("btn-sucess"))
-		{
-			element.classList.replace("btn-sucess", "btn-info");
-		}
 	}
 
 }

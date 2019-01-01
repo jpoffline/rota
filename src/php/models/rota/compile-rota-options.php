@@ -6,7 +6,7 @@ class CompileRotaOptions
 	private $all_dates;
 	private $resources;
 	private $skills;
-	
+	private $availtypes;
 
 	function __construct($rotaid, $periodid)
 	{
@@ -15,7 +15,7 @@ class CompileRotaOptions
 		$skillsdata  = new SkillsDataSetup();
 		$rotamembers = new RotaMembers();
 		$rotadates   = new RotaDataSetup();
-		
+		$this->availtypes = new AvailabilityTypesData();
 		$this->skills    = $skillsdata->get_skills_for_type($this->rotaid);
 		$this->resources = $rotamembers->get_all();
 		
@@ -90,26 +90,21 @@ class CompileRotaOptions
 					$this->rotaid
 				);
 				
-				$compiledRotaRow = $this->_check_avail(
-					1,
-					$date, 
-					$dateid, 
-					$periodid,
-					$resource_username, 
-					$resource_userid, 
-					$resource_skillids, 
-					$compiledRotaRow
-				);
-				$compiledRotaRow = $this->_check_avail(
-					2,
-					$date, 
-					$dateid, 
-					$periodid,
-					$resource_username, 
-					$resource_userid, 
-					$resource_skillids, 
-					$compiledRotaRow
-				);
+				
+				foreach($this->availtypes->typeids() as $availtypeid)
+				{
+					$compiledRotaRow = $this->_check_avail(
+						$availtypeid,
+						$date, 
+						$dateid, 
+						$periodid,
+						$resource_username, 
+						$resource_userid, 
+						$resource_skillids, 
+						$compiledRotaRow
+					);
+				}
+				
 			
 			}
 			$data[] = $compiledRotaRow;
@@ -175,8 +170,7 @@ class CompileRotaOptions
 	private function render_resource($id, $text, $availtype)
 	{
 		$html_tag = 'button';
-		if($availtype == 1){$css_init = 'btn btn-sm btn-info';}
-		else if($availtype == 2){$css_init = 'btn btn-sm btn-danger';}
+		$css_init = 'btn btn-sm btn-'.$this->availtypes->button($availtype);
 		$js_onclick = 'onClickRotaResource(this.id);';
 		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'" onClick="'.$js_onclick.'">'.
 			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text).'</'.$html_tag.'>';	
