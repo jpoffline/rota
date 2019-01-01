@@ -8,6 +8,8 @@ class CompileRotaOptions
 	private $skills;
 	private $availtypes;
 
+	private $id_compiledresource;
+
 	function __construct($rotaid, $periodid)
 	{
 		$this->rotaid = $rotaid;
@@ -18,7 +20,7 @@ class CompileRotaOptions
 		$this->availtypes = new AvailabilityTypesData();
 		$this->skills    = $skillsdata->get_skills_for_type($this->rotaid);
 		$this->resources = $rotamembers->get_all();
-		
+		$this->id_compiledresource = new IDCompiledResource();
 		$this->all_dates = $rotadates->get_dates_for_type_and_periodid($this->rotaid, $this->periodid);
 	}
 
@@ -140,7 +142,7 @@ class CompileRotaOptions
 				$skillid = $skill['skillid'];
 				if($this->_does_resource_have_skill($skillid, $resource_skillids))
 				{
-					$uid = implode('-',array($dateid, $resource_userid, $skillid));
+					$uid = $this->id_compiledresource->generate($dateid, $resource_userid, $skillid, $availtype);
 					$resource_toprint = $this->render_resource($uid, $resource_username, $availtype);
 					if($compiledRotaRow['skill'][$skillid] !=$empty)
 					{

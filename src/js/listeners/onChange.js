@@ -57,20 +57,6 @@ onClickRotaResource = function(id)
 	{
 		element.classList.toggle("active");
 		element.classList.toggle("activeusr");
-		/*
-		icon = to_icon('check');
-		if(element.classList.contains("active"))
-		{
-			element.innerHTML = icon + ' ' + element.innerHTML;
-		}
-		else
-		{
-			element.innerHTML = element.innerHTML.replace(icon + ' ','');
-		}*/
-		//element.classList.toggle("fa fa-check");
-		//console.log(element);
-		//console.log(element.getElementById(id+'-icon'));
-		
 		
 	}
 

@@ -44,6 +44,7 @@ function onSubmitSaveRotaOptions(id)
         }
         
     }
+    console.log("TODO: pass these active cells onto backend to process");
     console.log(activeCells);
     
 }

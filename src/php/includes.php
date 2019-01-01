@@ -27,6 +27,7 @@ include_once('src/php/ui/forms/add-period.php');
 include_once('src/php/models/rota/rota.php');
 include_once('src/php/models/rota/data-rota-setup.php');
 include_once('src/php/models/rota/compile-rota-options.php');
+include_once('src/php/models/rota/id-compiled.php');
 
 include_once('src/php/models/rota-members/rota-members.php');
 
