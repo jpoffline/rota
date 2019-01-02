@@ -7,7 +7,7 @@ class RotaDB_availabilitytypestbl{
 	}
 
 	function get_all(){
-		$sql = "SELECT availtypeid,availtype FROM availabilitytypes";
+		$sql = "SELECT availtypeid,availtype, badgecolour, icon FROM availabilitytypes";
 		
 		return $this->conn->query($sql);
 	}

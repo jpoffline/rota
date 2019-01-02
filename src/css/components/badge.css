@@ -11,3 +11,8 @@
 .active {
     background: #FF0;
 }
+
+.compiledbadge{
+	padding: 5px;
+	border-radius: 2px;
+}

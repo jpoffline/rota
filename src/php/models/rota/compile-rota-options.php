@@ -171,11 +171,12 @@ class CompileRotaOptions
 
 	private function render_resource($id, $text, $availtype)
 	{
-		$html_tag = 'button';
-		$css_init = 'btn btn-sm btn-'.$this->availtypes->button($availtype);
+		$html_tag = 'span';
+		$css_init = ''.$this->availtypes->button($availtype);
+		$css_col = $this->availtypes->button($availtype);
 		$js_onclick = 'onClickRotaResource(this.id);';
-		return '<'.$html_tag.' class="'.$css_init.'" id="'.$id.'" onClick="'.$js_onclick.'">'.
-			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text).'</'.$html_tag.'>';	
+		return '<'.$html_tag.' class="compiledbadge" style="background-color: '.$css_col.'" id="'.$id.'" onClick="'.$js_onclick.'">'.
+			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text). ' | '.to_icon($this->availtypes->icon($availtype)).'</'.$html_tag.'>';	
 	}
 	
 	

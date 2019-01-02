@@ -11,19 +11,29 @@ AUTHOR:   JPEARSON
 
 class RotaMemberAvailabilityView
 {
-	private $colnames = array('Date', 'Available','Confirmed');
+	private $colnames = array('Date');
 	private $avail;
 
+	private $availtypesdata;
+	
 	function __construct(&$member, $rotaid)
 	{
-		$this->id_avail = 1;
-		$this->id_confd = 2;
-		$this->id_unavail = 3;
+		$this->availtypesdata = new AvailabilityTypesData();
+		$this->colnames = array_merge($this->colnames, $this->availtypesdata->all_names());
+		
+		$this->id_avail   = $this->availtypesdata->id_for_name('tentative');
+		$this->id_confd   = $this->availtypesdata->id_for_name('confirmed');
+		$this->id_unavail = $this->availtypesdata->id_for_name('unavailable');
+		
 		$this->member_availability = $member->get_datedate($this->id_avail);
 		$this->member_confirmed    = $member->get_datedate($this->id_confd);
 		$this->member_unavailable  = $member->get_datedate($this->id_unavail);
+		
+		
 		$this->member_userid       = $member->get_userid();
+		
 		$rota_dates                = $member->get_all_dates($rotaid);
+		
 		$this->rotaid = $rotaid;
 		$this->periodid = $member->periodid;
 
@@ -33,12 +43,15 @@ class RotaMemberAvailabilityView
 		}
 	}
 
+
 	private function _generate_avail_row($date)
 	{
 		$date_str = $date['date'];
 		$date_id  = $date['dateid'];
 		$row = array(
+			
 			$date_str, 
+
 			Comp_MaterialSwitch_switch(
 				array(
 					'id'      => $this->_gen_avail_id($date_id, $this->id_avail),
@@ -50,6 +63,13 @@ class RotaMemberAvailabilityView
 				array(
 					'id'      => $this->_gen_avail_id($date_id, $this->id_confd),
 					'checked' => in_array($date_str, $this->member_confirmed)
+				)
+			),
+
+			Comp_MaterialSwitch_switch(
+				array(
+					'id'      => $this->_gen_avail_id($date_id, $this->id_unavail),
+					'checked' => in_array($date_str, $this->member_unavailable)
 				)
 			)
 			

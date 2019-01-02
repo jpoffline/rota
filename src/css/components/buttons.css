@@ -18,6 +18,3 @@
 .activeusr{
 	font-weight: bold;
 }
-.activeusr:before {
-    content:"• ";
-}
