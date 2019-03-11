@@ -14,27 +14,28 @@ function onSubmitListen(type, id) {
 
 function onSubmitSaveRotaOptions(id)
 {
+    console.log(id);
     var items = id.split('-');
     var rota = items[0];
     var periodid = items[1];
     var table = document.getElementById('compiled-'+id);
     
     var tds = table.getElementsByTagName("td");
-
+    
     var activeCells = [];
     for(var node in tds){
         nn = tds[node];
-
         if(nn.innerHTML)
         {
             if(nn.innerHTML != '-')
             {
-                btns = nn.getElementsByTagName('button');
+                
+                btns = nn.getElementsByTagName('span');
                 if(btns.length > 0)
                 {
                     for(var i = 0; i < btns.length; i++)
                     {
-                        if(btns[i].classList.contains("active"))
+                        if(btns[i].classList.contains("activeusr"))
                         {
                             activeCells.push({'id':btns[i].id});
                         }
@@ -110,7 +111,8 @@ function showUserAvailabilityOptions()
             'numavailabledays',
             'useravailabilityopts',
             'btnuserskills',
-            'mdluserskills'
+            'mdluserskills',
+            'daysdowntoplay'
         ],
         'multi'
     );

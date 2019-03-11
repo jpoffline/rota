@@ -93,7 +93,7 @@ class CompileRotaOptions
 				);
 				
 				
-				foreach($this->availtypes->typeids() as $availtypeid)
+				foreach(array(1, 2) as $availtypeid)
 				{
 					$compiledRotaRow = $this->_check_avail(
 						$availtypeid,
@@ -176,7 +176,7 @@ class CompileRotaOptions
 		$css_col = $this->availtypes->button($availtype);
 		$js_onclick = 'onClickRotaResource(this.id);';
 		return '<'.$html_tag.' class="compiledbadge" style="background-color: '.$css_col.'" id="'.$id.'" onClick="'.$js_onclick.'">'.
-			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text). ' | '.to_icon($this->availtypes->icon($availtype)).'</'.$html_tag.'>';	
+			   '</i><i id="'.$id.'-icon"></i>'.strToUpper($text).'</'.$html_tag.'>';	
 	}
 	
 	

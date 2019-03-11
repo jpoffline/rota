@@ -11,3 +11,9 @@
 * wire buttons into updating the data
 * create `write` methods to the data
 * generalise the `rota` and `period` pieces.
+* user can only say when they are unavaiable
+* modal for editing user unavaialble dates
+* user confirm their edits
+* admin notified of edits by highlighting row.
+* show users their skills from offset
+* admin sees only who isnt *not* available, then turns from grey to green

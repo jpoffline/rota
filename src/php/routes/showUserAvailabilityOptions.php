@@ -37,15 +37,19 @@ function route_showUserAvailabilityOptions($log, $data)
 		$body   = $rm->render_skills(),
 		$footer = ''
 	);
-    
+	
+	$avail = $rm->render_availability();
+
 	$ar = array(
 		'username'             => $rm->get_usernamefull(),
 		'rotatype'             => $rm->get_rota_type(),
 		'periodname'           => $rm->get_period_name($pid),
 		'numavailabledays'     => $rm->num_days_available(),
-		'useravailabilityopts' => $rm->render_availability(),
+		'useravailabilityopts' => $avail['opts'],
+		'daysdowntoplay'       => $avail['down'],
 		'btnuserskills'        => $btn,
 		'mdluserskills'        => $mdl
+		
 
 	);
 	$log('periodname: '.$rm->get_period_name($pid));

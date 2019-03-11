@@ -13,15 +13,16 @@ class RotaMemberAvailabilityView
 {
 	private $colnames = array('Date');
 	private $avail;
+	private $dates_down;
 
 	private $availtypesdata;
 	
 	function __construct(&$member, $rotaid)
 	{
 		$this->availtypesdata = new AvailabilityTypesData();
-		$this->colnames = array_merge($this->colnames, $this->availtypesdata->all_names());
+		$this->colnames = array_merge($this->colnames, array('unavailable'));
 		
-		$this->id_avail   = $this->availtypesdata->id_for_name('tentative');
+		$this->id_avail   = $this->availtypesdata->id_for_name('available');
 		$this->id_confd   = $this->availtypesdata->id_for_name('confirmed');
 		$this->id_unavail = $this->availtypesdata->id_for_name('unavailable');
 		
@@ -37,10 +38,23 @@ class RotaMemberAvailabilityView
 		$this->rotaid = $rotaid;
 		$this->periodid = $member->periodid;
 
+		
+
 		foreach($rota_dates as $date)
 		{
 			$this->avail[] = $this->_generate_avail_row($date);
+
+			if(in_array($date['date'], $this->member_confirmed))
+			{
+				$this->dates_down[] = $date['date'];
+			}
+
 		}
+	}
+
+	function get_dates_down()
+	{
+		return implode(',',$this->dates_down);
 	}
 
 
@@ -51,20 +65,6 @@ class RotaMemberAvailabilityView
 		$row = array(
 			
 			$date_str, 
-
-			Comp_MaterialSwitch_switch(
-				array(
-					'id'      => $this->_gen_avail_id($date_id, $this->id_avail),
-					'checked' => in_array($date_str, $this->member_availability)
-				)
-			),
-			
-			Comp_MaterialSwitch_switch(
-				array(
-					'id'      => $this->_gen_avail_id($date_id, $this->id_confd),
-					'checked' => in_array($date_str, $this->member_confirmed)
-				)
-			),
 
 			Comp_MaterialSwitch_switch(
 				array(

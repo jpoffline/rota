@@ -105,7 +105,7 @@ function RotaSQL_setDummyInfo()
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,18,3,1)");
 	$conn->query("INSERT INTO rotaavailability (rotaid, userid, dateid, periodid, availtypeid) VALUES (2,1,19,3,1)");
 	
-	$conn->query("INSERT INTO availabilitytypes (availtype, badgecolour, icon) VALUES ('tentative', 'orange', 'question');");
+	$conn->query("INSERT INTO availabilitytypes (availtype, badgecolour, icon) VALUES ('available', 'orange', 'question');");
 	$conn->query("INSERT INTO availabilitytypes (availtype, badgecolour, icon) VALUES ('confirmed', 'green', 'check');");
 	$conn->query("INSERT INTO availabilitytypes (availtype, badgecolour, icon) VALUES ('unavailable','red',  'times');");
 

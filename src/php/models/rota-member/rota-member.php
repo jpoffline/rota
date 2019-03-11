@@ -83,7 +83,10 @@ class RotaMember extends Rota
 			$this,
 			$this->rotaid
 		);
-		return $view_avail->render();
+		return array(
+			'opts'=>$view_avail->render(),
+			'down'=>$view_avail->get_dates_down()
+		);
 	}
 
 	function render_skills()

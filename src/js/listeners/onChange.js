@@ -55,9 +55,9 @@ onClickRotaResource = function(id)
 	
 	if(element.parentElement.parentElement.classList.contains('editable-row'))
 	{
-		element.classList.toggle("active");
+		//element.classList.toggle("active");
 		element.classList.toggle("activeusr");
-		
+		console.log(id);
 	}
 
 }

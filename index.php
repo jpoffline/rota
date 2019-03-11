@@ -40,7 +40,9 @@ include_once('src/php/html_head.php');
     <h2>
 			Rota: <span id = 'ui_rotatype'></span>
 		</h2>
-
+    <h2>
+      <span id = 'ui_daysdowntoplay'></span>
+    </h2>
     <span id = 'ui_btnuserskills'></span>
     <span id = 'ui_mdluserskills'></span>
 
@@ -48,11 +50,14 @@ include_once('src/php/html_head.php');
         
       <div class="col-md-6">
         <div class="panel panel-default">
-
+        
           <div class="panel-heading">
             My availability // 
+            
             <span id = 'ui_periodname'></span> //
             <span id = 'ui_numavailabledays'></span> days
+            
+            
           </div>
           <span id = 'ui_useravailabilityopts'></span>
         </div>
